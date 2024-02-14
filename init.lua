@@ -69,12 +69,12 @@ spec("sultan.extras.undotree")
 
 local checkNixos = os.getenv("NEOVIM_NIXOS") or "CHANGE THIS TO FALSE IF YOU ARE NOT USING NIXOS LINUX OS"
 if checkNixos == "false" then
-    -- First neovim install command: nvim --headless "+Lazy! sync" +qa
-    spec("sultan.lazy.fugitive")
-    spec("sultan.lazy.mason")
-    spec("sultan.lazy.rainbow")
-    spec("sultan.lazy.schemastore")
-    spec("sultan.lazy.sleuth")
-    spec("sultan.lazy.tmux-navigator")
-    require("sultan.lazy.lazy")
+	-- First neovim install command: nvim --headless "+Lazy! sync" +qa
+	spec("sultan.lazy.fugitive")
+	spec("sultan.lazy.mason")
+	spec("sultan.lazy.rainbow")
+	spec("sultan.lazy.schemastore")
+	spec("sultan.lazy.sleuth")
+	spec("sultan.lazy.tmux-navigator")
+	require("sultan.lazy.lazy")
 end
