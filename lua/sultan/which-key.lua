@@ -22,6 +22,7 @@ function M.config()
         -- p = { "Plugins" },
         t = { "Test" },
         w = { "Workspace" },
+        s = { "Spectre search" },
         -- b = { name = "Buffers" },
         -- d = { name = "Debug" },
         -- f = { name = "Find" },
@@ -79,14 +80,28 @@ function M.config()
         prefix = "<leader>",
     }
 
+    -- vim.keymap.set(
+    --     "n",
+    --     "<leader>s",
+    --     ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>",
+    --     { desc = "Search and replace" }
+    -- )
+    -- vim.keymap.set(
+    --     "n",
+    --     "<leader>s",
+    --     ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>",
+    --     { desc = "Search and replace" }
+    -- )
+
     wk.register(mappings, opts)
 
     wk.register({
         ["<leader>p"] = { '"_dp', "Replace and keep current yank", mode = "v" },
         ["<leader>P"] = { '"_dP', "Replace and keep current yank", mode = "v" },
+        ["<leader>y"] = { '"+y', "Replace and keep current yank" },
+        -- ["<leader>s"] = { ":%s/\\\\<<C-r><C-w>\\\\>/<C-r><C-w>/gI<Left><Left><Left>", "Search and replace", mode = "n" },
         ["<leader>ee"] = { "oif err != nil {<CR>}<Esc>Oreturn err<Esc>", "Go error snippet", mode = "n" },
-        -- TODO: Doesn't work https://www.youtube.com/watch?v=5HXINnalrAQ
-        -- ["<leader>rp"] = { ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>", "Search and replace", mode = "n" },
+        -- ["<leader>x"] = { "<cmd>!chmod +x %<CR>", "Make file executable", mode = "n" },
     })
 end
 
