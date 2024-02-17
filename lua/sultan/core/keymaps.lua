@@ -83,6 +83,7 @@ local defaults = {
 
         -- Save file
         ["<C-s>"] = ":w<CR>",
+        ["Q"] = "<nop>",
     },
 
     term_mode = {
