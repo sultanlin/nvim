@@ -148,18 +148,21 @@ M.config = function()
         },
         formatting = {
             -- fields = { "abbr", "menu", "kind" },
-            fields = { "kind", "abbr", "menu" },
+            -- fields = { "kind", "abbr", "menu" },
+            fields = { "abbr", "kind", "menu" },
             format = function(entry, vim_item)
                 vim_item.kind = icons.kind[vim_item.kind]
-                vim_item.menu = ({
-                    nvim_lsp = "",
-                    nvim_lua = "",
-                    luasnip = "",
-                    buffer = "",
-                    path = "",
-                    cmdline = "",
-                    emoji = "",
-                })[entry.source.name]
+                -- vim_item.menu = ({
+                --     nvim_lsp = "",
+                --     nvim_lua = "",
+                --     luasnip = "",
+                --     buffer = "",
+                --     path = "",
+                --     cmdline = "",
+                --     emoji = "",
+                -- })[entry.source.name]
+                local source = entry.source.name
+                vim_item.menu = "(" .. source .. ")"
 
                 if vim.tbl_contains({ "nvim_lsp" }, entry.source.name) then
                     local duplicates = {
