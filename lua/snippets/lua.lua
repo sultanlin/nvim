@@ -179,3 +179,24 @@ local {} = {}
     ), --}}}
 })
 -- End Refactoring --
+
+-- local all_snippets = {
+--   ['if'] = 'if $1 then\n\t$0\nend',
+--   ['ife'] = 'if $1 then\n\t$0\nelse\n\t-- TODO\nend',
+--   ['then'] = 'then\n\t$0\nend',
+--   ['eif'] = 'elseif $1 then\n\t$0\nend',
+--   ['  el'] = 'else\n$0',
+--   ['fun'] = 'function($1)\n\t$0\nend',
+--   ['for'] = 'for ${1:i}=${2:first},${3:last}${4:,step} do\n\t$0\nend',
+--   ['forp'] = 'for ${1:name},${2:val} in pairs(${3:table_name}) do\n\t$0\nend',
+--   ['fori'] = 'for ${1:idx},${2:val} in ipairs(${3:table_name}) do\n\t$0\nend',
+--   ['do'] = 'do\n\t$0\nend',
+--   ['repeat'] = 'repeat\n\t$1\nuntil $0',
+--   ['wh'] = 'while $1 do\n\t$0\nend',
+--   ['pcall'] = 'local ok, $1 = pcall($0)',
+--   ['l'] = 'local $1 = $0',
+--   ['desc'] = "describe('$1', function()\n\t$0\nend)",
+--   ['it'] = "it('$1', function()\n\t$0\nend)",
+--   ['TS'] = "T['$1'] = new_set()$0",
+--   ['T'] = "T['$1']['$2'] = function()\n\t$0MiniTest.skip()\nend",
+-- }
