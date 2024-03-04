@@ -1,0 +1,11 @@
+-- autoindent = true, --- Good auto indent
+-- expandtab = true, -- convert tabs to spaces
+-- tabstop = tablength, -- number of spaces when you tab
+-- smartindent = true, -- make indenting smarter again
+-- smarttab = true, --- Makes tabbing smarter will realize you have 2 vs 4
+-- softtabstop = tablength, --- Spaces per tab
+-- shiftround = true, -- Round indent
+-- shiftwidth = tablength, -- indent when using >> or <<
+-- Show line after desired maximum text width
+-- vim.cmd("setlocal expandtab=false")
+-- vim.cmd("setlocal autoindent=false")
