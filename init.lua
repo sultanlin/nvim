@@ -1,4 +1,8 @@
 -- REVIEW LATER: :h [
+-- FIX: Lag/flicker/blink when scrolling down using <C-d>
+-- Especially when scrolling down from top of the screen
+
+-- TODO: Add codium ai
 vim.loader.enable()
 require("sultan.core.options")
 require("sultan.core.keymaps")
@@ -13,7 +17,6 @@ spec("sultan.which-key")
 
 spec("sultan.devicons")
 spec("sultan.indentline")
-spec("sultan.lualine")
 spec("sultan.telescope")
 spec("sultan.treesitter")
 spec("sultan.treesitter-text-objects")
@@ -26,6 +29,7 @@ spec("sultan.lspconfig")
 spec("sultan.navic")
 spec("sultan.neogit")
 spec("sultan.none-ls")
+spec("sultan.lualine")
 -- spec("sultan.project")
 spec("sultan.toggleterm")
 
@@ -54,9 +58,10 @@ spec("sultan.extras.tabby")
 spec("sultan.extras.tabout")
 spec("sultan.extras.todo-comments")
 spec("sultan.extras.trouble")
-spec("sultan.extras.ufo")
+spec("sultan.extras.ufo") -- WARN: Do not use z, it will lag <C-d>zz
 spec("sultan.extras.undotree")
 spec("sultan.extras.spectre") -- Potential conflict with surround keymaps
+spec("sultan.extras.zen-mode")
 
 -- spec("sultan.formatter")
 spec("sultan.extras.illuminate")

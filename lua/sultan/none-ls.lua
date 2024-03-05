@@ -37,7 +37,11 @@ function M.config()
 
             -- diagnostics.ruff,
             diagnostics.statix,
-            diagnostics.vale,
+            -- diagnostics.vale, -- Missing config
+            -- diagnostics.vale.with({
+            --     extra_filetypes = { "txt", "text" },
+            --     extra_args = { "--config=/home/aaron/.config/vale/.vale.ini" },
+            -- }),
             diagnostics.hadolint,
             diagnostics.sqlfluff.with({
                 extra_args = { "--dialect", "postgres" }, -- change to your dialect
