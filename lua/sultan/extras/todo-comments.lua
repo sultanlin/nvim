@@ -6,7 +6,8 @@ local M = {
 
 function M.config()
     local options = {
-        signs = true, -- show icons in the signs column
+        signs = false, -- show icons in the signs column
+        -- signs = true, -- show icons in the signs column
         sign_priority = 8, -- sign priority
         -- keywords recognized as todo comments
         keywords = {
