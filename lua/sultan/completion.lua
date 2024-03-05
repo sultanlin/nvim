@@ -301,7 +301,11 @@ M.config = function()
 
     -- require("luasnip.loaders.from_lua").load("sultan.snippets")
     -- require("luasnip.loaders.from_lua").lazy_load({ paths = "~/.config/nvim/snippets" })
-    require("luasnip.loaders.from_lua").load({ paths = "~/.config/nvim/snippets" })
+    -- require("luasnip.loaders.from_lua").load({ paths = "~/.config/nvim/lua/snippets" })
+    -- require("luasnip.loaders.from_lua").load({ paths = { vim.fn.stdpath("config") .. "/lua/snippets" } })
+    require("luasnip.loaders.from_lua").lazy_load({ paths = { vim.fn.stdpath("config") .. "/lua/snippets" } })
+    -- https://github.com/echasnovski/nvim/blob/master/src/plugins/luasnip.lua
+    require("luasnip/loaders/from_vscode").lazy_load({ paths = { vim.fn.stdpath("config") .. "/lua/vscode_snippets" } })
 end
 
 return M

@@ -42,6 +42,9 @@ local defaults = {
         ["<A-Down>"] = "<C-\\><C-N><C-w>j",
         ["<A-Left>"] = "<C-\\><C-N><C-w>h",
         ["<A-Right>"] = "<C-\\><C-N><C-w>l",
+
+        -- Save file
+        ["<C-s>"] = "<ESC>:update<CR>",
     },
 
     normal_mode = {
@@ -82,7 +85,8 @@ local defaults = {
         ["-"] = "<C-x>",
 
         -- Save file
-        ["<C-s>"] = ":w<CR>",
+        ["<C-s>"] = "<ESC>:update<CR>",
+
         ["Q"] = "<nop>",
     },
 
