@@ -1,0 +1,80 @@
+return {
+    --     settings = {
+    --         -- json = {
+    --         --     schemas = require("schemastore").json.schemas(),
+    --         -- },
+    --         java = {
+    --             -- jdt = {
+    --             --   ls = {
+    --             --     vmargs = "-XX:+UseParallelGC -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90 -Dsun.zip.disableMemoryMapping=true -Xmx1G -Xms100m"
+    --             --   }
+    --             -- },
+    --             eclipse = {
+    --                 downloadSources = true,
+    --             },
+    --             configuration = {
+    --                 updateBuildConfiguration = "interactive",
+    --                 runtimes = path.runtimes,
+    --             },
+    --             maven = {
+    --                 downloadSources = true,
+    --             },
+    --             implementationsCodeLens = {
+    --                 enabled = true,
+    --             },
+    --             referencesCodeLens = {
+    --                 enabled = true,
+    --             },
+    --             -- inlayHints = {
+    --             --   parameterNames = {
+    --             --     enabled = 'all' -- literals, all, none
+    --             --   }
+    --             -- },
+    --             format = {
+    --                 enabled = true,
+    --                 -- settings = {
+    --                 --   profile = 'asdf'
+    --                 -- },
+    --             },
+    --         },
+    --         signatureHelp = {
+    --             enabled = true,
+    --         },
+    --         completion = {
+    --             favoriteStaticMembers = {
+    --                 "org.hamcrest.MatcherAssert.assertThat",
+    --                 "org.hamcrest.Matchers.*",
+    --                 "org.hamcrest.CoreMatchers.*",
+    --                 "org.junit.jupiter.api.Assertions.*",
+    --                 "java.util.Objects.requireNonNull",
+    --                 "java.util.Objects.requireNonNullElse",
+    --                 "org.mockito.Mockito.*",
+    --             },
+    --         },
+    --         contentProvider = {
+    --             preferred = "fernflower",
+    --         },
+    --         -- extendedClientCapabilities = jdtls.extendedClientCapabilities,
+    --         sources = {
+    --             organizeImports = {
+    --                 starThreshold = 9999,
+    --                 staticStarThreshold = 9999,
+    --             },
+    --         },
+    --         codeGeneration = {
+    --             toString = {
+    --                 template = "${object.className}{${member.name()}=${member.value}, ${otherMembers}}",
+    --             },
+    --             useBlocks = true,
+    --         },
+    --     },
+    --     -- setup = {
+    --     --     commands = {
+    --     --         Format = {
+    --     --             function()
+    --     --                 vim.lsp.buf.range_formatting({}, { 0, 0 }, { vim.fn.line("$"), 0 })
+    --     --             end,
+    --     --         },
+    --     --     },
+    --     -- },
+}

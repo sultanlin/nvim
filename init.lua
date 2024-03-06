@@ -27,11 +27,13 @@ spec("sultan.comment")
 spec("sultan.gitsigns")
 spec("sultan.lspconfig")
 spec("sultan.navic")
-spec("sultan.neogit")
+-- spec("sultan.neogit")
 spec("sultan.none-ls")
 spec("sultan.lualine")
 -- spec("sultan.project")
 spec("sultan.toggleterm")
+
+-- spec("sultan.extras.jdtls")
 
 -- Put them in extras
 -- https://github.com/ChristianChiarulli/nvim/blob/master/lua/user/extras/test.lua
@@ -50,18 +52,20 @@ spec("sultan.extras.harpoon")
 spec("sultan.extras.matchup")
 spec("sultan.extras.modicator")
 spec("sultan.extras.neotest")
-spec("sultan.extras.numb")
+-- spec("sultan.extras.numb")
 spec("sultan.extras.oil")
-spec("sultan.extras.spider")
+-- spec("sultan.extras.spider")
 spec("sultan.extras.surround")
 spec("sultan.extras.tabby")
-spec("sultan.extras.tabout")
+-- spec("sultan.extras.tabout")
 spec("sultan.extras.todo-comments")
 spec("sultan.extras.trouble")
 spec("sultan.extras.ufo") -- WARN: Do not use z, it will lag <C-d>zz
 spec("sultan.extras.undotree")
 spec("sultan.extras.spectre") -- Potential conflict with surround keymaps
 spec("sultan.extras.zen-mode")
+
+-- spec("sultan.extras.lsp-lazy")
 
 -- spec("sultan.formatter")
 spec("sultan.extras.illuminate")
