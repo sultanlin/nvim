@@ -122,27 +122,16 @@ M.config = function()
     -- TODO: Hide tabs when only 1 tab is open
 
     -- Hide tabby when only 1 tab is opened
-    vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead", "TabEnter" }, {
+    vim.api.nvim_create_autocmd({ "TabEnter", "TabNew", "TabClosed" }, {
         pattern = "*",
         callback = function()
-            if #vim.fn.getbufinfo({ buflisted = 1 }) >= 2 then
+            if vim.fn.tabpagenr("$") >= 2 then
                 vim.opt.showtabline = 2
+            elseif vim.fn.tabpagenr("$") < 2 then
+                vim.opt.showtabline = 0
             end
         end,
     })
---    vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead", "TabEnter", "TabClosed" }, {
---        pattern = "*",
---        callback = function()
---            if vim.fn.len() == 1 then
---                vim.opt.showtabline = 0
---            elseif vim.fn.len() >= 2 then
---                vim.opt.showtabline = 2
---            end
-            -- if #vim.fn.getbufinfo({ buflisted = 1 }) == 1 then
-            --     vim.opt.showtabline = 0
-            -- end
---        end,
---    })
 end
 
 return M
