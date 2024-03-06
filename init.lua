@@ -65,8 +65,6 @@ spec("sultan.extras.undotree")
 spec("sultan.extras.spectre") -- Potential conflict with surround keymaps
 spec("sultan.extras.zen-mode")
 
--- spec("sultan.extras.lsp-lazy")
-
 -- spec("sultan.formatter")
 spec("sultan.extras.illuminate")
 -- spec("sultan.linter")
