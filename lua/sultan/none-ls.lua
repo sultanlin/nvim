@@ -34,6 +34,7 @@ function M.config()
             formatting.taplo,
             formatting.buf,
             formatting.shellharden,
+            -- formatting.google_java_format,
 
             -- diagnostics.ruff,
             diagnostics.statix,
