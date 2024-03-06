@@ -55,13 +55,13 @@ M.config = function()
                 cmp.mapping.select_next_item({ behavior = types.cmp.SelectBehavior.Select }),
                 { "i", "c" }
             ), -- next suggestion
-            ["<C-h>"] = function()
-                if cmp.visible_docs() then
-                    cmp.close_docs()
-                else
-                    cmp.open_docs()
-                end
-            end,
+            -- ["<C-h>"] = function()
+            --     if cmp.visible_docs() then
+            --         cmp.close_docs()
+            --     else
+            --         cmp.open_docs()
+            --     end
+            -- end,
             ["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-1), { "i", "c" }),
             ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(1), { "i", "c" }),
             ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }), -- show completion suggestions
@@ -74,29 +74,40 @@ M.config = function()
             -- 	behavior = cmp.ConfirmBehavior.Replace,
             -- 	select = true,
             -- }),
-            ["<Tab>"] = cmp.mapping(function(fallback)
-                if cmp.visible() then
-                    cmp.select_next_item()
-                elseif luasnip.expandable() then
-                    luasnip.expand()
-                elseif luasnip.expand_or_locally_jumpable() then
+            ["<C-l>"] = cmp.mapping(function()
+                if luasnip.expand_or_locally_jumpable() then
                     luasnip.expand_or_jump()
-                elseif check_backspace() then
-                    fallback()
-                -- require("neotab").tabout()
-                else
-                    fallback()
                 end
             end, { "i", "s" }),
-            ["<S-Tab>"] = cmp.mapping(function(fallback)
-                if cmp.visible() then
-                    cmp.select_prev_item()
-                elseif luasnip.locally_jumpable(-1) then
+            ["<C-h>"] = cmp.mapping(function()
+                if luasnip.locally_jumpable(-1) then
                     luasnip.jump(-1)
-                else
-                    fallback()
                 end
             end, { "i", "s" }),
+            -- NOTE: No longer using Super-tab
+            -- ["<Tab>"] = cmp.mapping(function(fallback)
+            --     if cmp.visible() then
+            --         cmp.select_next_item()
+            --     elseif luasnip.expandable() then
+            --         luasnip.expand()
+            --     elseif luasnip.expand_or_locally_jumpable() then
+            --         luasnip.expand_or_jump()
+            --     elseif check_backspace() then
+            --         fallback()
+            --     -- require("neotab").tabout()
+            --     else
+            --         fallback()
+            --     end
+            -- end, { "i", "s" }),
+            -- ["<S-Tab>"] = cmp.mapping(function(fallback)
+            --     if cmp.visible() then
+            --         cmp.select_prev_item()
+            --     elseif luasnip.locally_jumpable(-1) then
+            --         luasnip.jump(-1)
+            --     else
+            --         fallback()
+            --     end
+            -- end, { "i", "s" }),
         }),
         window = {
             completion = {
