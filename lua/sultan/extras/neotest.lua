@@ -12,10 +12,12 @@ local M = {
         "rouge8/neotest-rust",
         "lawrence-laz/neotest-zig",
         "rcasia/neotest-bash",
+        "rcasia/neotest-java",
     },
 }
 
 function M.config()
+    local neotest = require("neotest")
     local wk = require("which-key")
     wk.register({
         ["<leader>tt"] = { "<cmd>lua require'neotest'.run.run()<cr>", "Test Nearest" },
@@ -23,6 +25,8 @@ function M.config()
         ["<leader>td"] = { "<cmd>lua require('neotest').run.run({strategy = 'dap'})<cr>", "Debug Test" },
         ["<leader>ts"] = { "<cmd>lua require('neotest').run.stop()<cr>", "Test Stop" },
         ["<leader>ta"] = { "<cmd>lua require('neotest').run.attach()<cr>", "Attach Test" },
+        ["<leader>to"] = { "<cmd>lua require'neotest'.output.open()<cr>", "Open output" },
+        ["<leader>te"] = { "<cmd>lua require'neotest'.summary.toggle()<cr>", "Toggle summary" },
     })
 
     ---@diagnostic disable: missing-fields
@@ -36,6 +40,9 @@ function M.config()
             -- require "neotest-zig",
             require("neotest-rust"),
             require("neotest-go"),
+            require("neotest-java")({
+                ignore_wrapper = false, -- whether to ignore maven/gradle wrapper
+            }),
             -- require "neotest-vim-test" {
             --   ignore_file_types = { "python", "vim", "lua", "javascript", "typescript" },
             -- },
