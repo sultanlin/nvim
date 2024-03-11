@@ -54,9 +54,11 @@ local defaults = {
         ["<C-k>"] = "<C-w>k",
         ["<C-l>"] = "<C-w>l",
 
+        -- BUG: Jiggery/Jittery/Flickery
+        -- Buggy when scrolling from top or bottom of screen
         -- Center after scrolling down or up
-        ["<C-d>"] = "<C-d>zz",
-        ["<C-u>"] = "<C-u>zz",
+        -- ["<C-d>"] = "<C-d>zz",
+        -- ["<C-u>"] = "<C-u>zz",
 
         -- Center after scrolling down or up
         ["J"] = "mzJ`z", -- TODO: Does it even work?

@@ -82,7 +82,8 @@ local options = {
     numberwidth = 2, -- set number column width {default 4}
     -- colorcolumn = "80",
     cmdheight = 1, -- 0, --- Give more space for displaying messages
-    scrolloff = 0, -- minimal number of columns to scroll horizontally.  was 8
+    -- scrolloff = 0, -- minimal number of columns to scroll horizontally.  was 8
+    scrolloff = 8, -- minimal number of columns to scroll horizontally.
     sidescrolloff = 8, -- minimal number of screen columns
     completeopt = { "menu,menuone,noselect" }, -- Better autocompletion
 
