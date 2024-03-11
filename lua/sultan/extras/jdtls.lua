@@ -162,7 +162,6 @@ function M.config()
             opts,
             { desc = "Test nearest method" }
         )
-        print("done")
     end
 
     local function jdtls_on_attach(client, bufnr)
@@ -210,7 +209,7 @@ function M.config()
             opts,
             { desc = "Extract method" }
         )
-        keymap("n", "<leader>ju", "<Cmd>JdtUpdateConfig<CR>", opts, { desc = "Update config" })
+        vim.keymap.set("n", "<leader>ju", "<Cmd>JdtUpdateConfig<CR>", opts, { desc = "Update config" })
     end
 
     local function jdtls_setup(event)
@@ -305,11 +304,11 @@ function M.config()
                         "java.util.Objects.requireNonNullElse",
                         "org.mockito.Mockito.*",
                         -- NOTE: From https://github.com/mrcjkb/nvim/blob/master/nvim/after/ftplugin/java.lua
-                        -- "io.vavr.API.$",
-                        -- "io.vavr.API.Case",
-                        -- "io.vavr.API.Match",
-                        -- "io.vavr.API.For",
-                        -- "io.vavr.Predicates.not",
+                        "io.vavr.API.$",
+                        "io.vavr.API.Case",
+                        "io.vavr.API.Match",
+                        "io.vavr.API.For",
+                        "io.vavr.Predicates.not",
                     },
                 },
                 contentProvider = { preferred = "fernflower" },
@@ -347,17 +346,22 @@ function M.config()
             init_options = {
                 bundles = path.bundles,
             },
+            handlers = {
+                -- Stops loading/loaded message when opening java files
+                -- ["language/status"] = function() end,
+                -- FIXME: Maybe check this again? https://github.com/neovim/nvim-lspconfig/blob/master/lua/lspconfig/server_configurations/jdtls.lua#L117
+            },
         })
-
-        vim.cmd(
-            "command! -buffer -nargs=? -complete=custom,v:lua.require'jdtls'._complete_compile JdtCompile lua require('jdtls').compile(<f-args>)"
-        )
-        vim.cmd(
-            "command! -buffer -nargs=? -complete=custom,v:lua.require'jdtls'._complete_set_runtime JdtSetRuntime lua require('jdtls').set_runtime(<f-args>)"
-        )
-        vim.cmd("command! -buffer JdtUpdateConfig lua require('jdtls').update_project_config()")
-        vim.cmd("command! -buffer JdtBytecode lua require('jdtls').javap()")
     end
+
+    vim.cmd(
+        "command! -buffer -nargs=? -complete=custom,v:lua.require'jdtls'._complete_compile JdtCompile lua require('jdtls').compile(<f-args>)"
+    )
+    vim.cmd(
+        "command! -buffer -nargs=? -complete=custom,v:lua.require'jdtls'._complete_set_runtime JdtSetRuntime lua require('jdtls').set_runtime(<f-args>)"
+    )
+    vim.cmd("command! -buffer JdtUpdateConfig lua require('jdtls').update_project_config()")
+    vim.cmd("command! -buffer JdtBytecode lua require('jdtls').javap()")
 
     vim.api.nvim_create_autocmd("FileType", {
         group = java_cmds,
