@@ -1,12 +1,11 @@
 # nvim
 
+https://github.com/jordanisaacs/neovim-flake/blob/main/modules/languages/java.nix
+
 # Debug settings
 
-https://github.com/Alexis12119/nvim-config/blob/main/plugins/jdtls.lua
+https://github.com/Alexis12119/nvim-config/blob/main/plugins/jdtls.lua <!-- More than just jdtls -->
 
-# JAVA SETUP
+# Neovim nightly in NixOS
 
-https://www.youtube.com/watch?v=0q_MKUynUck&t=2716s
-https://github.com/LunarVim/Launch.nvim/blob/java-ide-0.7/ftplugin/java.LunarVim
-https://github.com/LunarVim/Launch.nvim/blob/java-ide-0.7/lua/user/lsp/handlers.lua
-https://github.com/VonHeikemen/lsp-zero.nvim/blob/v3.x/doc/md/guides/setup-with-nvim-jdtls.md
+https://old.reddit.com/r/NixOS/comments/1978uja/neovim_nightly_overlay_inside_a_flake/
