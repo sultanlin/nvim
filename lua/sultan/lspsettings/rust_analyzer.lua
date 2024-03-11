@@ -9,6 +9,9 @@ return {
             cargo = {
                 allFeatures = true,
             },
+            formatting = {
+                dynamicRegistration = true,
+            },
         },
     },
 }

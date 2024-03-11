@@ -26,15 +26,15 @@ function M.config()
             -- formatting.ruff_format,
             formatting.goimports,
             formatting.gofmt,
-            formatting.templ,
+            -- formatting.templ,
             -- formatting.gofumpt,
             formatting.alejandra,
-            formatting.rustfmt,
+            -- formatting.rustfmt,
             formatting.shfmt,
-            formatting.taplo,
+            -- formatting.taplo,
             formatting.buf,
             formatting.shellharden,
-            -- formatting.google_java_format,
+            formatting.google_java_format,
 
             -- diagnostics.ruff,
             diagnostics.statix,
@@ -47,9 +47,10 @@ function M.config()
             diagnostics.sqlfluff.with({
                 extra_args = { "--dialect", "postgres" }, -- change to your dialect
             }),
+            -- diagnostics.shellcheck,
 
             codeaction.statix,
-            codeaction.shellcheck,
+            -- codeaction.shellcheck,
         },
         on_attach = function(client, bufnr)
             if client.supports_method("textDocument/formatting") then

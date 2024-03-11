@@ -16,7 +16,7 @@ function M.config()
     wk.register({
         ["<F1>"] = { "<cmd>lua require'dap'.step_into()<cr>", "Step Into" },
         ["<F2>"] = { "<cmd>lua require'dap'.step_over()<cr>", "Step Over" },
-        ["<f3>"] = { "<cmd>lua require'dap'.step_out()<cr>", "Step Out" },
+        ["<F3>"] = { "<cmd>lua require'dap'.step_out()<cr>", "Step Out" },
         ["<leader>dt"] = { "<cmd>lua require'dap'.toggle_breakpoint()<cr>", "Toggle Breakpoint" },
         ["<leader>db"] = { "<cmd>lua require'dap'.step_back()<cr>", "Step Back" },
         ["<leader>dc"] = { "<cmd>lua require'dap'.continue()<cr>", "Continue" },
