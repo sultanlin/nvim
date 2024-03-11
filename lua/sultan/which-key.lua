@@ -104,8 +104,10 @@ function M.config()
     wk.register(mappings, opts)
 
     wk.register({
-        ["<leader>p"] = { '"_dp', "Replace and keep current yank", mode = "v" },
-        ["<leader>P"] = { '"_dP', "Replace and keep current yank", mode = "v" },
+        -- ["<leader>p"] = { '"_dp', "Replace and keep current yank", mode = "v" },
+        -- ["<leader>P"] = { '"_dP', "Replace and keep current yank", mode = "v" },
+        ["<leader>p"] = { '"0p', "Replace and keep current yank", mode = "v" },
+        ["<leader>P"] = { '"0P', "Replace and keep current yank", mode = "v" },
         ["<leader>y"] = { '"+y', "Replace and keep current yank" },
         -- ["<leader>s"] = { ":%s/\\\\<<C-r><C-w>\\\\>/<C-r><C-w>/gI<Left><Left><Left>", "Search and replace", mode = "n" },
         ["<leader>ee"] = { "oif err != nil {<CR>}<Esc>Oreturn err<Esc>", "Go error snippet", mode = "n" },
