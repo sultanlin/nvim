@@ -145,13 +145,13 @@ M.on_attach = function(client, bufnr)
 
     -- bufmap('<leader>wr', vim.lsp.buf.remove_workspace_folder, "[W]orkspace [R]emove folder")
 
-    bufmap(
-        "<leader>lf",
-        "<cmd>lua vim.lsp.buf.format({async = true, filter = function(client) return client.name ~= 'typescript-tools' end})<cr>",
-        "[F]ormat"
-    )
     -- bufmap("<leader>la", "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code [A]ction")
     bufmap("<leader>la", vim.lsp.buf.code_action, "Code [A]ction")
+    -- if client.name == "rust-analyzer" then
+    --     bufmap("<leader>la", vim.cmd.RustLsp("codeAction"), "Code [A]ction")
+    -- else
+    --     bufmap("<leader>la", vim.lsp.buf.code_action, "Code [A]ction")
+    -- end
     bufmap("<leader>li", "<cmd>LspInfo<cr>", "[I]nfo")
     bufmap("<leader>lj", "<cmd>lua vim.diagnostic.goto_next()<cr>", "Next Diagnostic")
     -- bufmap("<leader>lh", "<cmd>lua require('sultan.lspconfig').toggle_inlay_hints()<cr>", "Toggle Inlay [H]ints")
@@ -161,6 +161,9 @@ M.on_attach = function(client, bufnr)
     bufmap("<leader>ll", "<cmd>lua vim.lsp.codelens.run()<cr>", "Code[L]ens Action")
     bufmap("<leader>lr", "<cmd>lua vim.lsp.buf.rename()<cr>", "[R]ename")
     bufmap("<leader>lq", "<cmd>lua vim.diagnostic.setloclist()<cr>", "[Q]uickfix / Open diagnostics list")
+    bufmap("<leader>ly", vim.lsp.codelens.refresh, "Refresh code lenses")
+    -- bufmap("[x", vim.lsp.codelens.goto_prev, "lsp: previous code[l]ens")
+    -- bufmap("]x", vim.lsp.codelens.goto_next, "lsp: next code[l]ens")
 
     vim.keymap.set(
         "v",
@@ -191,23 +194,8 @@ M.on_attach = function(client, bufnr)
             filter = function(client)
                 return client.name == "null-ls"
             end,
-            -- if client.name == "null-ls" then
-            --     return client.name == "null-ls"
-            -- elseif client.name ~= "null-ls" then
-            --     vim.lsp.buf.format({
-            --         async = true,
-            --         filter = function(client)
-            --             return client.name ~= "typescript-tools"
-            --         end,
-            --     })
-            -- end
         })
     end, { desc = "Format current buffer with LSP" })
-    -- bufmap(
-    --     "<leader>lf",
-    --     "<cmd>lua vim.lsp.buf.format({async = true, filter = function(client) return client.name ~= 'typescript-tools' end})<cr>",
-    --     "[F]ormat"
-    -- )
 
     if client.supports_method("textDocument/inlayHint") then
         vim.lsp.inlay_hint.enable(bufnr, true)
@@ -218,10 +206,10 @@ M.on_attach = function(client, bufnr)
     --     client.resolved_capabilities.document_formatting = false
     -- end
     -- Turn off formatting from LSP
-    if client.name == "jdt.ls" then
-        client.resolved_capabilities.document_formatting = false
-        -- client.resolved_capabilities.textDocument.completion.completionItem.snippetSupport = false
-    end
+    -- if client.name == "jdt.ls" then
+    --     client.resolved_capabilities.document_formatting = false
+    --     -- client.resolved_capabilities.textDocument.completion.completionItem.snippetSupport = false
+    -- end
 end
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
