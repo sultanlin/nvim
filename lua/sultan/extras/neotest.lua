@@ -1,6 +1,7 @@
 local M = {
     "nvim-neotest/neotest",
     dependencies = {
+        "nvim-lua/plenary.vim",
         "nvim-treesitter/nvim-treesitter",
         -- general tests
         "vim-test/vim-test",
@@ -26,7 +27,8 @@ function M.config()
         ["<leader>ts"] = { "<cmd>lua require('neotest').run.stop()<cr>", "Test Stop" },
         ["<leader>ta"] = { "<cmd>lua require('neotest').run.attach()<cr>", "Attach Test" },
         ["<leader>to"] = { "<cmd>lua require'neotest'.output.open()<cr>", "Open output" },
-        ["<leader>te"] = { "<cmd>lua require'neotest'.summary.toggle()<cr>", "Toggle summary" },
+        ["<leader>tO"] = { "<cmd>lua require'neotest'.output_panel.toggle()<cr>", "Toggle output panel" },
+        ["<leader>tS"] = { "<cmd>lua require'neotest'.summary.toggle()<cr>", "Toggle summary" },
     })
 
     ---@diagnostic disable: missing-fields
@@ -36,17 +38,36 @@ function M.config()
                 dap = { justMyCode = false },
             }),
             require("neotest-vitest"),
-            require("neotest-jest"),
             -- require "neotest-zig",
             require("neotest-rust"),
             require("neotest-go"),
             require("neotest-java")({
                 ignore_wrapper = false, -- whether to ignore maven/gradle wrapper
             }),
+            require("rustaceanvim.neotest"),
             -- require "neotest-vim-test" {
             --   ignore_file_types = { "python", "vim", "lua", "javascript", "typescript" },
             -- },
+            require("neotest-jest")({
+                jestConfigFile = function()
+                    local file = vim.fn.expand("%:p")
+                    if string.find(file, "/packages/") then
+                        return string.match(file, "(.-/[^/]+/)src") .. "jest.config.ts"
+                    end
+                    return vim.fn.getcwd() .. "/jest.config.ts"
+                end,
+                cwd = function()
+                    local file = vim.fn.expand("%:p")
+                    if string.find(file, "/packages/") then
+                        return string.match(file, "(.-/[^/]+/)src")
+                    end
+                    return vim.fn.getcwd() .. "/jest.config.ts"
+                end,
+            }),
         },
+        status = { virtual_text = true },
+        output = { open_on_run = true },
+        output = { open_on_run = true },
     })
 end
 
