@@ -19,6 +19,7 @@ M.config = function()
     -- keymap("<leader>fl", "<cmd>Telescope resume<cr>","Last Search"  )
     keymap("<leader>fr", "<cmd>Telescope oldfiles<cr>", "Recent File")
     keymap("<leader>fn", "<cmd>Telescope find_files cwd=~/.config/nvim<cr>", "Neovim config files")
+    keymap("<leader>ft", "<cmd>TodoTelescope<cr>", "Todo comments")
 
     local wk = require("which-key")
     wk.register({
