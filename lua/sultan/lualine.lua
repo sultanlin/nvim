@@ -53,8 +53,8 @@ M.config = function()
                 },
             },
             lualine_c = {
-                "%=",
-                require("sultan.lualine").clients_lsp,
+                -- "%=",
+                -- require("sultan.lualine").clients_lsp,
             },
             lualine_x = {
                 -- {
