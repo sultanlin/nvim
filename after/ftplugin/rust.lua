@@ -1,57 +1,69 @@
-vim.g.rustaceanvim = function()
-    -- Update this path
-    -- local extension_path = vim.env.HOME .. "/.vscode/extensions/vadimcn.vscode-lldb-1.10.0/"
-    local extension_path = os.getenv("LSP_CODELLDB") .. "/share/vscode/extensions/vadimcn.vscode-lldb/"
-    local codelldb_path = extension_path .. "adapter/codelldb"
-    local liblldb_path = extension_path .. "lldb/lib/liblldb"
-    local this_os = vim.uv.os_uname().sysname
-
-    -- The path is different on Windows
-    if this_os:find("Windows") then
-        codelldb_path = extension_path .. "adapter\\codelldb.exe"
-        liblldb_path = extension_path .. "lldb\\bin\\liblldb.dll"
-    else
-        -- The liblldb extension is .so for Linux and .dylib for MacOS
-        liblldb_path = liblldb_path .. (this_os == "Linux" and ".so" or ".dylib")
-    end
-
-    local cfg = require("rustaceanvim.config")
-    return {
-        -- Plugin configuration
-        tools = {},
-        -- LSP configuration
-        server = {
-            on_attach = function(client, bufnr)
-                require("sultan.lspconfig").on_attach(client, bufnr)
-                -- you can also put keymaps in here
-            end,
-            default_settings = {
-                -- rust-analyzer language server configuration
-                ["rust-analyzer"] = {
-                    cargo = {
-                        allFeatures = true,
-                    },
-                    formatting = {
-                        dynamicRegistration = true,
-                    },
-                },
-            },
-        },
-        -- DAP configuration
-        dap = {
-            adapter = cfg.get_codelldb_adapter(codelldb_path, liblldb_path),
-        },
-    }
+-- https://github.com/mrcjkb/nvim/blob/master/nvim/after/ftplugin/rust.lua
+local bufnr = vim.api.nvim_get_current_buf()
+local function desc(description)
+    return { noremap = true, silent = true, buffer = bufnr, desc = description }
 end
--- vim.g.rustaceanvim = {}
+--
+vim.keymap.set("n", "<leader>rdd", function()
+    vim.cmd.RustLsp("debuggables")
+end, desc("[r]ust: [dd]ebuggables"))
+vim.keymap.set("n", "<leader>rdl", function()
+    vim.cmd.RustLsp({ "debuggables", bang = true })
+end, desc("[r]ust: run [d]ebuggables [l]ast"))
+vim.keymap.set("n", "<leader>rr", function()
+    vim.cmd.RustLsp("runnables")
+end, desc("[r]ust: [r]unnables"))
+vim.keymap.set("n", "<leader>rl", function()
+    vim.cmd.RustLsp({ "runnables", bang = true })
+end, desc("[r]ust: [r]unnables [l]ast"))
+vim.keymap.set("n", "<leader>rtt", function()
+    vim.cmd.RustLsp("testables")
+end, desc("[r]ust: [t]es[t]ables"))
+vim.keymap.set("n", "<leader>rtl", function()
+    vim.cmd.RustLsp({ "testables", bang = true })
+end, desc("[r]ust: run [t]estables [l]ast"))
+vim.keymap.set("n", "gm", function()
+    vim.cmd.RustLsp("expandMacro")
+end, desc("[r]ust: [m]acro [e]xpand"))
+-- vim.keymap.set("n", "<leader>rk", function()
+--     vim.cmd.RustLsp({ "moveItem", "up" })
+-- end, desc("[r]ust: move item up [k]"))
+-- vim.keymap.set("n", "<leader>rj", function()
+--     vim.cmd.RustLsp({ "moveItem", "down" })
+-- end, desc("[r]ust: move item down [j]"))
+vim.keymap.set("v", "K", function()
+    vim.cmd.RustLsp({ "hover", "range" })
+end, desc("rust: hover range"))
+vim.keymap.set("n", "<leader>re", function()
+    vim.cmd.RustLsp("explainError")
+end, desc("[r]ust: [e]xplain error"))
+vim.keymap.set("n", "gl", function()
+    vim.cmd.RustLsp("renderDiagnostic")
+end, desc("rust: [r]ender [d]iagnostic"))
+-- vim.keymap.set("n", "<leader>lcc", function()
+--     vim.cmd.RustLsp("openCargo")
+-- end, desc("rust: go to [c]argo.toml"))
+-- vim.keymap.set("n", "<leader>lcp", function()
+--     vim.cmd.RustLsp("parentModule")
+-- end, desc("rust: go to [p]arent module"))
+-- vim.keymap.set("n", "J", function()
+--     vim.cmd.RustLsp("joinLines")
+-- end, desc("rust: join lines"))
+-- vim.keymap.set("n", "<leader>rs", function()
+--     vim.cmd.RustLsp("ssr")
+-- end, desc("[r]ust: [s]sr"))
 
--- local util = require("lspconfig/util")
--- return {
---     -- cmd = { "rustup", "run", "stable", "rust-analyzer" },
---     cmd = { "rust-analyzer" },
---     filetypes = { "rust" },
---     root_dir = util.root_pattern("Cargo.toml"),
---     settings = {
---         ["rust-analyzer"] = {},
---     },
--- }
+-- local codelens = require("sultan.lsp.codelens")
+-- ---@param lens lsp.CodeLens
+-- ---@return boolean
+-- local testable_predicate = function(lens)
+--     local title = vim.tbl_get(lens, "command", "title")
+--     return title and title:find("Run Test") ~= nil or false
+-- end
+
+-- vim.keymap.set("n", "[t", function()
+--     codelens.goto_prev({ predicate = testable_predicate })
+-- end, desc("rust: previous [t]estable"))
+-- vim.keymap.set("n", "]t", function()
+--     codelens.goto_next({ predicate = testable_predicate })
+-- end, desc("rust: next [t]estable"))
