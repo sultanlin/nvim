@@ -89,6 +89,9 @@ local defaults = {
         -- Save file
         ["<C-s>"] = "<ESC>:update<CR>",
 
+        -- Select all
+        ["<C-a>"] = "ggVG",
+
         ["Q"] = "<nop>",
     },
 

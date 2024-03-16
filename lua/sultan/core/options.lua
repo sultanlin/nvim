@@ -23,6 +23,8 @@ local options = {
     smartcase = true, -- smart case idk
     hlsearch = true, -- highlight all matches on previous search pattern
 
+    -- showmatch = true, -- Highlight matching parentheses etc
+
     -- Spelling ===================================================================
     -- spell = true,
     spelllang = "en,uk", -- Define spelling dictionaries
@@ -34,7 +36,7 @@ local options = {
     -- UI =========================================================================
 
     breakindent = true, -- Indent wrapped lines to match line start
-    colorcolumn = "+1", -- Draw colored column one step to the right of desired maximum width
+    colorcolumn = "100", -- Draw colored column one step to the right of desired maximum width
     cursorline = true, -- Enable highlighting of the current line    -- WARN: Potentially laggy
     -- laststatus = 2, -- Always show statusline
     -- linebreak = true, -- Wrap long lines at 'breakat' (if 'wrap' is set)
@@ -95,7 +97,8 @@ local options = {
     --let &showbreak = '↳ '
     cpo = "n",
     splitkeep = "screen",
-    timeoutlen = 1000, -- time to wait for a mapped sequence to complete (in milliseconds)  was 500,
+    timeout = true,
+    timeoutlen = 300, -- time to wait for a mapped sequence to complete (in milliseconds)  was 500,
     updatetime = 200, -- faster completion (4000ms default)
     writebackup = false, -- if a file is being edited by another program (or was written to file while editing with another program), it is not allowed to be edited
     lazyredraw = false, -- Won't be redrawn while executing macros, register and other commands.
@@ -144,6 +147,8 @@ local options = {
     foldlevel = 99, --- Using ufo provider need a large value
     foldlevelstart = 99, --- Expand all folds by default
     -- markdown_folding = 1,   -- Use folding by heading in markdown files
+
+    shell = "zsh",
 }
 
 local global = {
