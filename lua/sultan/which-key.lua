@@ -11,6 +11,8 @@ function M.config()
     local tabline = true
     local mappings = {
         q = { "<cmd>confirm q<CR>", "Quit" },
+        x = { "<cmd>x<CR>", "Write and Quit" },
+
         -- h = { "<cmd>nohlsearch<CR>", "NOHL" },
         ["-"] = { "<cmd>nohlsearch<CR>", "NOHL" },
         [";"] = { "<cmd>tabnew | terminal<CR>", "[T]erminal" },
@@ -41,11 +43,6 @@ function M.config()
             h = { "<cmd>-tabmove<cr>", "Move Left" },
             l = { "<cmd>+tabmove<cr>", "Move Right" },
             a = { "<cmd>tabnext<cr>", "Goto next tab" },
-            c = {
-                -- 'nnoremap <expr><silent> <leader>, &showtabline ? ":set showtabline=0<cr>" : ":set showtabline=2<cr>"',
-                '&showtabline ? ":set showtabline=0<cr>" : ":set showtabline=2<cr>"',
-                "Close tabs",
-            },
         },
         T = { name = "Treesitter" },
     }
@@ -108,9 +105,9 @@ function M.config()
         -- ["<leader>P"] = { '"_dP', "Replace and keep current yank", mode = "v" },
         ["<leader>p"] = { '"0p', "Replace and keep current yank", mode = "v" },
         ["<leader>P"] = { '"0P', "Replace and keep current yank", mode = "v" },
-        ["<leader>y"] = { '"+y', "Replace and keep current yank" },
+        ["<leader>y"] = { '"+y', "Yank ??" },
         -- ["<leader>s"] = { ":%s/\\\\<<C-r><C-w>\\\\>/<C-r><C-w>/gI<Left><Left><Left>", "Search and replace", mode = "n" },
-        ["<leader>ee"] = { "oif err != nil {<CR>}<Esc>Oreturn err<Esc>", "Go error snippet", mode = "n" },
+        -- ["<leader>ee"] = { "oif err != nil {<CR>}<Esc>Oreturn err<Esc>", "Go error snippet", mode = "n" },
         -- ["<leader>x"] = { "<cmd>!chmod +x %<CR>", "Make file executable", mode = "n" },
     })
 end
