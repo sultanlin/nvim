@@ -12,6 +12,7 @@ local M = {
         "Shatur/neovim-ayu",
         "loctvl842/monokai-pro.nvim",
         "nyoom-engineering/oxocarbon.nvim",
+        -- https://github.com/tiagovla/tokyodark.nvim
 
         -- Not neovim, can't configure with lua
         "sainnhe/gruvbox-material",
@@ -31,26 +32,15 @@ local M = {
 M.config = function()
     -- Pick colorscheme here
     local colorscheme = "catppuccin"
-    ColorMyPencils(colorscheme)
-end
-
-function ColorMyPencils(color)
-    color = color or "rose-pine"
-
-    require("sultan.colorscheme").colors()
-
-    vim.cmd.colorscheme(color)
-
-    -- vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
-    -- vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
-    -- -- vim.api.nvim_set_hl(0, "LineNr", { bg = "none" })
-    -- vim.api.nvim_set_hl(0, "SignColumn", { bg = "none" })
-    -- vim.api.nvim_set_hl(0, "EndOfBuffer", { bg = "none" })
+    -- local colorscheme = "gruvbox"
+    -- local colorscheme = "kanagawa"
+    ColorMyPencils(colorscheme, true)
 end
 
 M.colors = function()
     require("tokyonight").setup({
-        -- style = "storm", -- The theme comes in three styles, 'storm', 'moon', a darker variant 'night' and 'day'
+        style = "storm", -- The theme comes in three styles, 'storm', 'moon', a darker variant 'night' and 'day'
+        -- style = "moon", -- The theme comes in three styles, 'storm', 'moon', a darker variant 'night' and 'day'
         -- style = "night", -- The theme comes in three styles, 'storm', 'moon', a darker variant 'night' and 'day'
         -- transparent = true, -- Enable this to disable setting the background color
         transparent = false, -- Enable this to disable setting the background color
@@ -166,6 +156,31 @@ M.colors = function()
     -- nightfly
     vim.g.nightflyTransparent = true
     vim.g.nightflyItalics = false
+end
+
+function ColorMyPencils(color, transparent)
+    color = color or "rose-pine"
+
+    require("sultan.colorscheme").colors()
+
+    vim.cmd.colorscheme(color)
+
+    if transparent == true then
+        vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
+        vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
+        vim.api.nvim_set_hl(0, "LineNr", { bg = "none" })
+        vim.api.nvim_set_hl(0, "SignColumn", { bg = "none" })
+        vim.api.nvim_set_hl(0, "EndOfBuffer", { bg = "none" })
+        vim.api.nvim_set_hl(0, "GitSignsChange", { bg = "none" })
+        vim.api.nvim_set_hl(0, "GitSignsDelete", { bg = "none" })
+        vim.api.nvim_set_hl(0, "GitSignsAdd", { bg = "none" })
+        vim.api.nvim_set_hl(0, "StatusLine", { bg = "none" })
+        vim.api.nvim_set_hl(0, "Folded", { bg = "none" })
+        vim.api.nvim_set_hl(0, "FoldColumn", { bg = "none" })
+        vim.api.nvim_set_hl(0, "NonText", { bg = "none" })
+        vim.api.nvim_set_hl(0, "Text", { bg = "none" })
+        vim.api.nvim_set_hl(0, "CursorLineNr", { bg = "none" })
+    end
 end
 
 return M
