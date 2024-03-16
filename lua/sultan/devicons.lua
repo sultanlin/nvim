@@ -7,13 +7,13 @@ function M.config()
 
     devicons.setup({
         -- TODO: idk why this doesn't work
-        -- override = {
-        --   ["README.md"] = {
-        --     icon = "",
-        --     color = "#519aba",
-        --     name = "README.md",
-        --   },
-        -- },
+        override = {
+            ["README.md"] = {
+                icon = "",
+                color = "#519aba",
+                name = "README.md",
+            },
+        },
     })
 
     devicons.set_icon({
