@@ -37,6 +37,8 @@ local init = function()
     -- spec("sultan.project")
     spec("sultan.toggleterm")
 
+    spec("sultan.rustaceanvim")
+
     -- Put them in extras
     -- https://github.com/ChristianChiarulli/nvim/blob/master/lua/user/extras/test.lua
     -- https://www.youtube.com/watch?v=KGJV0n70Mxs
@@ -52,6 +54,7 @@ local init = function()
     spec("sultan.extras.gitlinker")
     spec("sultan.extras.harpoon")
     spec("sultan.extras.matchup")
+    spec("sultan.extras.mini")
     -- spec("sultan.extras.modicator") -- BUG: Breaks jdtls code actions preview (command line preview)
     spec("sultan.extras.neotest")
     spec("sultan.extras.jdtls")
@@ -62,6 +65,7 @@ local init = function()
     spec("sultan.extras.tabby")
     -- spec("sultan.extras.tabout")
     spec("sultan.extras.todo-comments")
+    spec("sultan.extras.lazygit")
     spec("sultan.extras.trouble")
     spec("sultan.extras.ufo") -- warn: do not use z, it will lag <c-d>zz
     spec("sultan.extras.undotree")
@@ -71,7 +75,7 @@ local init = function()
     spec("sultan.extras.illuminate")
     -- spec("sultan.formatter")
     -- spec("sultan.linter")
-    -- spec("sultan.nvimtree")
+    spec("sultan.nvimtree")
     -- spec("sultan.alpha")
 end
 
