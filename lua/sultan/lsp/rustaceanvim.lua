@@ -25,7 +25,7 @@ M.config = function()
             liblldb_path = liblldb_path .. (this_os == "Linux" and ".so" or ".dylib")
         end
         local cfg = require("rustaceanvim.config")
-        local my_lsp = require("sultan.lspconfig")
+        local my_lsp = require("sultan.lsp.lspconfig")
 
         vim.g.rustaceanvim = {
             -- Plugin configuration
@@ -55,7 +55,7 @@ M.config = function()
                     --     inlay_hints = { type_hints = { prefix = "=> " } },
                     -- })
                     -- require("lsp-inlayhints").on_attach(client, bufnr)
-                    require("illuminate").on_attach(client)
+                    -- require("illuminate").on_attach(client)
 
                     local bufopts = {
                         noremap = true,
@@ -83,12 +83,6 @@ M.config = function()
                             command = "clippy",
                             allFeatures = true,
                         },
-                        inlayHints = {
-                            lifetimeElisionHints = {
-                                enable = true,
-                                useParameterNames = true,
-                            },
-                        },
                         procMacro = {
                             enable = true,
                             ignored = {
@@ -96,6 +90,65 @@ M.config = function()
                                 ["napi-derive"] = { "napi" },
                                 ["async-recursion"] = { "async_recursion" },
                             },
+                        },
+                        -- inlayHints = {
+                        --     lifetimeElisionHints = {
+                        --         enable = true,
+                        --         useParameterNames = true,
+                        --     },
+                        -- },
+                        inlayHints = {
+                            chainingHints = {
+                                bindingModeHints = {
+                                    enable = true,
+                                },
+                                chainingHints = {
+                                    enable = true,
+                                },
+                                closingBraceHints = {
+                                    enable = true,
+                                    minLines = 25,
+                                },
+                                closureCaptureHints = {
+                                    enable = true,
+                                },
+                                closureReturnTypeHints = {
+                                    enable = "always", -- "never"
+                                },
+                                closureStyle = "impl_fn",
+                                discriminantHints = {
+                                    enable = "always", -- "never"
+                                },
+                                expressionAdjustmentHints = {
+                                    hideOutsideUnsafe = false,
+                                    mode = "prefix",
+                                },
+                                implicitDrops = {
+                                    enable = true,
+                                },
+                                lifetimeElisionHints = {
+                                    enable = "always", -- "never"
+                                    useParameterNames = true,
+                                },
+                                maxLength = 25,
+                                parameterHints = {
+                                    enable = true,
+                                },
+                                rangeExclusiveHints = {
+                                    enable = true,
+                                },
+                                renderColons = {
+                                    enable = true,
+                                },
+                                typeHints = {
+                                    enable = true,
+                                    hideClosureInitialization = false,
+                                    hideNamedConstructor = false,
+                                },
+                            },
+                        },
+                        lens = {
+                            enable = true,
                         },
                     },
                 },

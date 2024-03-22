@@ -166,7 +166,7 @@ function M.config()
 
     local function jdtls_on_attach(client, bufnr)
         -- Load my lsp settings
-        local my_lsp = require("sultan.lspconfig")
+        local my_lsp = require("sultan.lsp.lspconfig")
         my_lsp.on_attach(client, bufnr)
 
         if features.debugger then
@@ -334,7 +334,7 @@ function M.config()
             cmd = cmd,
             settings = lsp_settings,
             on_attach = jdtls_on_attach,
-            capabilities = require("sultan.lspconfig").capabilities,
+            capabilities = require("sultan.lsp.lspconfig").capabilities,
             -- capabilities = cache_vars.capabilities,
             root_dir = jdtls.setup.find_root(root_files),
             flags = { allow_incremental_sync = true },

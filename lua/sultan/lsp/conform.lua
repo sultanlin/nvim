@@ -13,22 +13,18 @@ M.config = function()
             -- 	args = { "--selfclose", "-" },
             -- },
             prettierd = {
-                -- prepend_args = { "html-whitespace-sensitivity", "ignore" },
-                -- env = {
-                --     htmlWhitespaceSensitivity = "ignore",
-                -- },
                 prepend_args = {
                     "--no-semi",
                     "--single-quote",
                     "--jsx-single-quote",
                     "--html-whitespace-sensitivity ignore",
-                    -- "ignore",
                 },
             },
         },
         formatters_by_ft = {
             lua = { "stylua" },
             -- python = { "ruff_fix ", "ruff_format" },
+            -- Use a sub-list to run only the first available formatter
             javascript = { { "prettierd", "prettier" } },
             typescript = { { "prettierd", "prettier" } },
             typescriptreact = { { "prettierd", "prettier" } },
@@ -38,15 +34,16 @@ M.config = function()
             html = { { "prettierd", "prettier" } },
             json = { { "prettierd", "prettier" } },
             yaml = { { "prettierd", "prettier" } },
-            markdown = { { "prettierd", "prettier" } },
+            -- markdown = { { "prettierd", "prettier" } },
             graphql = { { "prettierd", "prettier" } },
 
             -- cs = { "csharpier" },
             -- markdown = { "mdformat" },
             -- xml = { "xmlformat" },
             -- yaml = { "yamlfix" },
-            go = { "goimports", "gofmt", "templ" },
-            templ = { "templ", "goimports", "gofmt" },
+            -- Conform will run multiple formatters sequentially
+            go = { "gofmt", "goimports", "templ" },
+            templ = { "templ", "gofmt", "goimports" },
             nix = { "alejandra" },
             -- rust = { "rustfmt" },
             bash = { "shfmt", "shellcheck" },
@@ -65,3 +62,14 @@ M.config = function()
 end
 
 return M
+-- 		nls.builtins.formatting.stylua.with({ extra_args = { "--indent-type", "Spaces", "--indent-width", "2" } }),
+-- 		nls.builtins.formatting.prettier.with({
+-- 			extra_args = { "--single-quote", "false", "--html-whitespace-sensitivity", "css" },
+-- 		}),
+-- 		nls.builtins.formatting.prettierd.with({
+-- 			extra_args = { "--single-quote", "false", "--html-whitespace-sensitivity", "css" },
+-- 		}),
+-- 		nls.builtins.formatting.terraform_fmt,
+-- 		nls.builtins.formatting.latexindent.with({
+-- 			extra_args = { "-g", "/dev/null" }, -- https://github.com/cmhughes/latexindent.pl/releases/tag/V3.9.3
+-- 		}),

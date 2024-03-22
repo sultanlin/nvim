@@ -21,21 +21,32 @@ function M.config()
     local neotest = require("neotest")
     local wk = require("which-key")
     wk.register({
-        ["<leader>tt"] = { "<cmd>lua require'neotest'.run.run()<cr>", "Test Nearest" },
+        ["<leader>tm"] = { "<cmd>lua require'neotest'.run.run()<cr>", "Test Method" },
+        ["<leader>tM"] = { "<cmd>lua require'neotest'.run.run({strategy = 'dap'})<cr>", "Test Method DAP" },
         ["<leader>tf"] = { "<cmd>lua require('neotest').run.run(vim.fn.expand('%'))<cr>", "Test File" },
-        ["<leader>td"] = { "<cmd>lua require('neotest').run.run({strategy = 'dap'})<cr>", "Debug Test" },
-        ["<leader>ts"] = { "<cmd>lua require('neotest').run.stop()<cr>", "Test Stop" },
-        ["<leader>ta"] = { "<cmd>lua require('neotest').run.attach()<cr>", "Attach Test" },
+        ["<leader>tF"] = {
+            "<cmd>lua require('neotest').run.run(vim.fn.expand('%'), strategy = 'dap')<cr>",
+            "Test File DAP",
+        },
+        ["<leader>ts"] = { "<cmd>lua require'neotest'.summary.toggle()<cr>", "Toggle summary" },
         ["<leader>to"] = { "<cmd>lua require'neotest'.output.open()<cr>", "Open output" },
         ["<leader>tO"] = { "<cmd>lua require'neotest'.output_panel.toggle()<cr>", "Toggle output panel" },
-        ["<leader>tS"] = { "<cmd>lua require'neotest'.summary.toggle()<cr>", "Toggle summary" },
+        -- ["<leader>ts"] = { "<cmd>lua require('neotest').run.stop()<cr>", "Test Stop" },
+        -- ["<leader>ta"] = { "<cmd>lua require('neotest').run.attach()<cr>", "Attach Test" },
     })
 
     ---@diagnostic disable: missing-fields
     require("neotest").setup({
         adapters = {
             require("neotest-python")({
-                dap = { justMyCode = false },
+                -- Extra arguments for nvim-dap configuration
+                -- See https://github.com/microsoft/debugpy/wiki/Debug-configuration-settings for values
+                dap = {
+                    justMyCode = false,
+                    console = "integratedTerminal",
+                },
+                args = { "--log-level", "DEBUG", "--quiet" },
+                runner = "pytest",
             }),
             require("neotest-vitest"),
             -- require "neotest-zig",
@@ -45,9 +56,9 @@ function M.config()
                 ignore_wrapper = false, -- whether to ignore maven/gradle wrapper
             }),
             require("rustaceanvim.neotest"),
-            -- require "neotest-vim-test" {
-            --   ignore_file_types = { "python", "vim", "lua", "javascript", "typescript" },
-            -- },
+            require("neotest-vim-test")({
+                ignore_file_types = { "python", "vim", "lua", "javascript", "typescript" },
+            }),
             require("neotest-jest")({
                 jestConfigFile = function()
                     local file = vim.fn.expand("%:p")

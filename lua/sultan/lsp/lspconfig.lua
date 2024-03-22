@@ -93,7 +93,7 @@ M.config = function()
             capabilities = M.capabilities,
         }
 
-        local require_ok, settings = pcall(require, "sultan.lspsettings." .. server)
+        local require_ok, settings = pcall(require, "sultan.lsp.lspsettings." .. server)
         if require_ok then
             opts = vim.tbl_deep_extend("force", settings, opts)
         end
@@ -168,14 +168,14 @@ M.on_attach = function(client, bufnr)
     -- Still doesn' work well (buggy when inlay hints is not supported by lsp)
     -- bufmap(
     --     "<leader>lh",
-    --     -- "<cmd>require('sultan.lspconfig').toggle_inlay_hints(client, bufnr, vim.lsp.inlay_hint.is_enabled(bufnr))<cr>",
+    --     -- "<cmd>require('sultan.lsp.lspconfig').toggle_inlay_hints(client, bufnr, vim.lsp.inlay_hint.is_enabled(bufnr))<cr>",
     --     -- "<cmd>toggle_inlay_hints(client, bufnr, vim.lsp.inlay_hint.is_enabled(bufnr))<cr>",
     --     -- "<cmd>lua vim.lsp.inlay_hint.enable(bufnr, vim.lsp.inlay_hint.is_enabled(vim.api.nvim_get_current_buf()))<cr>",
     --     "<cmd>lua vim.lsp.inlay_hint.enable(vim.api.nvim_get_current_buf(), vim.lsp.inlay_hint.is_enabled(vim.api.nvim_get_current_buf()))<cr>",
     --     -- "<cmd>lua vim.lsp.inlay_hint.enable(bufnr, true)<cr>",
     --     "Toggle inlay hints"
     -- )
-    -- bufmap("<leader>lh", require("sultan.lspconfig").toggle_inlay_hints, "Toggle Inlay [H]ints")
+    -- bufmap("<leader>lh", require("sultan.lsp.lspconfig").toggle_inlay_hints, "Toggle Inlay [H]ints")
     -- bufmap("<leader>lh", function()
 
     if client.supports_method("textDocument/inlayHint") then

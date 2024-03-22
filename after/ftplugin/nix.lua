@@ -1,6 +1,6 @@
 -- FIX:
 -- https://www.reddit.com/r/neovim/comments/14pk1u5/lsp_tells_me_to_enable_autofetch_in/
-local lsp = require("sultan.lspconfig")
+local lsp = require("sultan.lsp.lspconfig")
 
 if vim.fn.executable("nil") ~= 1 then
     print("error")

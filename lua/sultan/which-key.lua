@@ -24,6 +24,7 @@ function M.config()
         f = { "Find" },
         g = { "Git" },
         l = { "LSP" },
+        c = { "Code" },
         -- p = { "Plugins" },
         t = { "Test" },
         w = { "Workspace" },

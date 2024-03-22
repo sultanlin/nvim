@@ -21,6 +21,7 @@ M.config = function()
             dockerfile = { "hadolint" },
             -- bash = { "shellcheck" },
             -- zsh = { "shellcheck" },
+            python = { "ruff" },
         },
     }
 

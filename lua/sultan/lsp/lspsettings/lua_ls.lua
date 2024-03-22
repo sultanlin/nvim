@@ -1,5 +1,10 @@
 local runtime_path = vim.split(package.path, ";")
 return {
+    -- handlers = {
+    --     ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
+    --         stylize_markdown = false,
+    --     }),
+    -- },
     settings = {
         Lua = {
             format = { enable = false },

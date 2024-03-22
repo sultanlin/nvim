@@ -1,3 +1,6 @@
+-- Resources:
+-- https://www.youtube.com/watch?v=fGzoSvJFbqw
+
 local M = {
     "hrsh7th/nvim-cmp",
     event = "InsertEnter",
