@@ -64,6 +64,7 @@ function M.config()
         -- typescriptreact = { "lsp", "treesitter" },
         -- python = { "indent" },
         -- git = "",
+        yaml = "", -- TODO: Confirm that this fixes yaml crash
     }
 
     require("ufo").setup({
