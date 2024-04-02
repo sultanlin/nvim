@@ -57,7 +57,7 @@ local init = function()
     spec("sultan.extras.eyeliner")
     spec("sultan.git.gitlinker")
     spec("sultan.extras.harpoon")
-    spec("sultan.extras.markdown-preview")
+    -- spec("sultan.extras.glow") TODO: Install glow.nvim
     spec("sultan.extras.matchup")
     -- spec("sultan.extras.modicator") -- BUG: Breaks jdtls code actions preview (command line preview)
     -- spec("sultan.extras.numb")
