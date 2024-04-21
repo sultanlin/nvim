@@ -31,8 +31,10 @@ local M = {
 
 M.config = function()
     -- Pick colorscheme here
-    local colorscheme = "catppuccin"
+    -- local colorscheme = "catppuccin"
+    -- local colorscheme = "rose-pine"
     -- local colorscheme = "gruvbox"
+    local colorscheme = "gruvbox-material"
     -- local colorscheme = "kanagawa"
     ColorMyPencils(colorscheme, true)
 end
