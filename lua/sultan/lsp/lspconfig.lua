@@ -142,7 +142,7 @@ M.on_attach = function(client, bufnr)
     bufmap("<leader>wa", vim.lsp.buf.add_workspace_folder, "[W]orkspace [A]dd folder")
     bufmap("<leader>wr", vim.lsp.buf.remove_workspace_folder, "[W]orkspace [R]emove folder")
     bufmap("<leader>wl", function()
-        print(vim.inspect(vim.lsp.buf.list_workspace_folder()))
+        print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
     end, "[W]orkspace [L]ist folder")
 
     -- bufmap("<leader>la", "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code [A]ction")
