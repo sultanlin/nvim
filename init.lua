@@ -39,6 +39,7 @@ local init = function()
     -- spec("sultan.project")
     spec("sultan.toggleterm")
     spec("sultan.nvimtree")
+    spec("sultan.autopairs")
 
     spec("sultan.lsp.rustaceanvim")
     spec("sultan.lsp.jdtls")
