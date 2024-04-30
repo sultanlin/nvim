@@ -22,6 +22,7 @@ function M.config()
         ["<leader>dc"] = { "<cmd>lua require'dap'.continue()<cr>", "Continue" },
         ["<leader>dC"] = { "<cmd>lua require'dap'.run_to_cursor()<cr>", "Run To Cursor" },
         ["<leader>dd"] = { "<cmd>lua require'dap'.disconnect()<cr>", "Disconnect" },
+        ["<leader>dd"] = { "<cmd>lua require'dap'.disconnect()<cr>", "Disconnect" },
         ["<leader>dg"] = { "<cmd>lua require'dap'.session()<cr>", "Get Session" },
         -- ["<leader>di"] = { "<cmd>lua require'dap'.step_into()<cr>", "Step Into" },
         -- ["<leader>do"] = { "<cmd>lua require'dap'.step_over()<cr>", "Step Over" },
@@ -34,7 +35,52 @@ function M.config()
     })
     require("nvim-dap-virtual-text").setup()
     require("dap-go").setup({})
-    require("dapui").setup({})
+    require("dapui").setup({
+        expand_lines = true,
+        floating = {
+            border = "single",
+            mappings = {
+                close = { "q", "<Esc>" },
+            },
+        },
+        force_buffers = true,
+        layouts = {
+            {
+                elements = {
+                    {
+                        id = "scopes",
+                        size = 0.50,
+                    },
+                    {
+                        id = "stacks",
+                        size = 0.30,
+                    },
+                    {
+                        id = "watches",
+                        size = 0.10,
+                    },
+                    {
+                        id = "breakpoints",
+                        size = 0.10,
+                    },
+                },
+                size = 40,
+                position = "left", -- Can be "left" or "right"
+            },
+            {
+                elements = {
+                    "repl",
+                    "console",
+                },
+                size = 10,
+                position = "bottom", -- Can be "bottom" or "top"
+            },
+        },
+        render = {
+            indent = 1,
+            max_value_lines = 100,
+        },
+    })
 
     local dap, dapui = require("dap"), require("dapui")
     dap.listeners.before.attach.dapui_config = function()
@@ -50,6 +96,7 @@ function M.config()
         dapui.close()
     end
 
+    -- https://github.com/bcampolo/nvim-starter-kit/blob/java/.config/nvim/lua/plugins/nvim-dap-ui.lua
     -- require("dap").configurations.java = {
     --     {
     --         name = "Debug Launch (2GB)",
