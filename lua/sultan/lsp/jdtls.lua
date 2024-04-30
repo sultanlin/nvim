@@ -287,6 +287,9 @@ function M.config()
                 maven = { downloadSources = true },
                 implementationsCodeLens = { enabled = true },
                 referencesCodeLens = { enabled = true },
+                references = {
+                    includeDecompiledSources = true,
+                },
                 -- inlayHints = {
                 --   parameterNames = {
                 --     enabled = 'all' -- literals, all, none
@@ -347,6 +350,12 @@ function M.config()
                 bundles = path.bundles,
             },
             handlers = {
+                ["language/status"] = function(_, result)
+                    -- Print or whatever.
+                end,
+                ["$/progress"] = function(_, result, ctx)
+                    -- disable progress updates.
+                end,
                 -- Stops loading/loaded message when opening java files
                 -- ["language/status"] = function() end,
                 -- FIXME: Maybe check this again? https://github.com/neovim/nvim-lspconfig/blob/master/lua/lspconfig/server_configurations/jdtls.lua#L117
