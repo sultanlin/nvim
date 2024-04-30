@@ -130,7 +130,6 @@ M.config = function()
         sources = {
             -- { name = "copilot" },
             -- { name = "nvim_lsp" },
-            { name = "luasnip" },
             {
                 name = "nvim_lsp",
                 entry_filter = function(entry, ctx)
@@ -150,6 +149,7 @@ M.config = function()
                     return true
                 end,
             },
+            { name = "luasnip" },
             -- { name = "cmp_tabnine" },
             { name = "nvim_lua" },
             { name = "buffer" },
