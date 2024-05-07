@@ -12,10 +12,14 @@ M.config = function()
             -- 	cmd = { "xmlformat" },
             -- 	args = { "--selfclose", "-" },
             -- },
+            prettierd = {
+                env = {
+                    PRETTIERD_DEFAULT_CONFIG = vim.fn.expand("$HOME/.config/nvim/.prettierrc"),
+                },
+            },
             prettier = {
                 prepend_args = {
                     "--no-semi",
-                    -- "true",
                     -- "--single-quote",
                     -- "--jsx-single-quote",
                     "--html-whitespace-sensitivity",
@@ -27,20 +31,17 @@ M.config = function()
             lua = { "stylua" },
             -- python = { "ruff_fix ", "ruff_format" },
             -- Use a sub-list to run only the first available formatter
-            -- Prettierd: Difficult to configure in the same way as prettier
-            -- Was using prettierd, but prettierd does not take any arguments
-            javascript = { "prettier" },
-            typescript = { "prettier" },
-            typescriptreact = { "prettier" },
-            javascriptreact = { "prettier" },
-            svelte = { "prettier" },
-            css = { "prettier" },
-            -- html = { { "prettierd", "prettier" } },
-            html = { "prettier" },
-            json = { "prettier" },
-            yaml = { "prettier" },
+            javascript = { { "prettierd", "prettier" } },
+            typescript = { { "prettierd", "prettier" } },
+            typescriptreact = { { "prettierd", "prettier" } },
+            javascriptreact = { { "prettierd", "prettier" } },
+            svelte = { { "prettierd", "prettier" } },
+            css = { { "prettierd", "prettier" } },
+            html = { { "prettierd", "prettier" } },
+            json = { { "prettierd", "prettier" } },
+            yaml = { { "prettierd", "prettier" } },
             -- markdown = { { "prettierd", "prettier" } },
-            graphql = { "prettier" },
+            graphql = { { "prettierd", "prettier" } },
 
             -- cs = { "csharpier" },
             -- markdown = { "mdformat" },
