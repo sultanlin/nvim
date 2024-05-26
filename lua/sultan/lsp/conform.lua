@@ -12,6 +12,11 @@ M.config = function()
             -- 	cmd = { "xmlformat" },
             -- 	args = { "--selfclose", "-" },
             -- },
+            ["google-java-format"] = {
+                prepend_args = {
+                    "-aosp",
+                },
+            },
             prettierd = {
                 env = {
                     PRETTIERD_DEFAULT_CONFIG = vim.fn.expand("$HOME/.config/nvim/.prettierrc"),
