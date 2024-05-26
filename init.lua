@@ -19,7 +19,7 @@ local init = function()
 
     spec("sultan.devicons")
     -- spec("sultan.indentline")
-    spec("sultan.telescope")
+    spec("sultan.telescope") -- TODO: display_path to filename_first when I update
     spec("sultan.treesitter")
     spec("sultan.treesitter-text-objects")
     spec("sultan.lsp.debug")

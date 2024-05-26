@@ -76,6 +76,7 @@ M.config = function()
     telescope.setup({
         defaults = {
             -- path_display = { "truncate " },
+            -- path_display = { "filename_first" },
             prompt_prefix = icons.ui.Telescope .. " ",
             selection_caret = icons.ui.Forward .. " ",
             entry_prefix = "   ",
