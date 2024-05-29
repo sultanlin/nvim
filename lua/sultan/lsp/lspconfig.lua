@@ -106,12 +106,13 @@ M.config = function()
 end
 
 M.on_attach = function(client, bufnr)
-    function toggle_inlay_hints()
-        if client.supports_method("textDocument/inlayHint") then
-            local ih = vim.lsp.inlay_hint
-            ih.enable(bufnr, not ih.is_enabled(bufnr))
-        end
-    end
+    -- function toggle_inlay_hints()
+    --     if client.supports_method("textDocument/inlayHint") then
+    --         -- local ih = vim.lsp.inlay_hint
+    --         -- ih.enable(bufnr, not ih.is_enabled(bufnr))
+    --         -- ih.enable(not vim.lsp.inlay_hint.is_enabled())
+    --     end
+    -- end
     local bufmap = function(keys, func, descr)
         vim.keymap.set("n", keys, func, { buffer = bufnr, desc = descr, noremap = true, silent = true })
     end
@@ -178,10 +179,15 @@ M.on_attach = function(client, bufnr)
     -- bufmap("<leader>lh", require("sultan.lsp.lspconfig").toggle_inlay_hints, "Toggle Inlay [H]ints")
     -- bufmap("<leader>lh", function()
 
-    if client.supports_method("textDocument/inlayHint") then
-        bufmap("<leader>lh", toggle_inlay_hints, "Toggle Inlay [H]ints")
-        vim.lsp.inlay_hint.enable(bufnr, false)
-    end
+    -- if client.supports_method("textDocument/inlayHint") then
+    --     vim.lsp.inlay_hint.enable(false)
+    -- bufmap("<leader>lq", "<cmd>lua vim.diagnostic.setloclist()<cr>", "[Q]uickfix / Open diagnostics list")
+    bufmap(
+        "<leader>lh",
+        "<cmd>lua vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())<cr>",
+        "Toggle Inlay [H]ints"
+    )
+    -- end
 end
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
