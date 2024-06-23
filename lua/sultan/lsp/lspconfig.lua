@@ -20,6 +20,7 @@ M.config = function()
         "emmet_ls",
         "taplo",
         "nil_ls",
+        "nixd",
         "clangd",
         "bashls",
         "dockerls",
