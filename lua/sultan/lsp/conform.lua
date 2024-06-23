@@ -4,7 +4,9 @@ M.config = function()
     local conform = require("conform")
     conform.setup({
         format_on_save = {
-            timeout_ms = 500,
+            -- BUG:timing out?!?
+            -- timeout_ms = 500,
+            timeout_ms = 700,
             lsp_fallback = true,
         },
         formatters = {
@@ -66,7 +68,8 @@ M.config = function()
         vim.keymap.set({ "n", "v" }, "<leader>lf", function()
             conform.format({
                 lsp_fallback = true,
-                timeout_ms = 500,
+                -- timeout_ms = 500,
+                timeout_ms = 700,
             })
         end, { desc = "Format file or range (in visual mode)" }),
     })
