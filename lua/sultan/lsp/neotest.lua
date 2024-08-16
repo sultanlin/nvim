@@ -50,30 +50,31 @@ function M.config()
             }),
             require("neotest-vitest"),
             -- require "neotest-zig",
-            require("neotest-rust"),
+            -- require("neotest-rust"),
             require("neotest-go"),
             require("neotest-java")({
                 ignore_wrapper = false, -- whether to ignore maven/gradle wrapper
             }),
-            require("rustaceanvim.neotest"),
+            -- DAP rustacean broken
+            -- require("rustaceanvim.neotest"),
             require("neotest-vim-test")({
                 ignore_file_types = { "python", "vim", "lua", "javascript", "typescript" },
             }),
             require("neotest-jest")({
-                jestConfigFile = function()
-                    local file = vim.fn.expand("%:p")
-                    if string.find(file, "/packages/") then
-                        return string.match(file, "(.-/[^/]+/)src") .. "jest.config.ts"
-                    end
-                    return vim.fn.getcwd() .. "/jest.config.ts"
-                end,
-                cwd = function()
-                    local file = vim.fn.expand("%:p")
-                    if string.find(file, "/packages/") then
-                        return string.match(file, "(.-/[^/]+/)src")
-                    end
-                    return vim.fn.getcwd() .. "/jest.config.ts"
-                end,
+                -- jestConfigFile = function()
+                --     local file = vim.fn.expand("%:p")
+                --     if string.find(file, "/packages/") then
+                --         return string.match(file, "(.-/[^/]+/)src") .. "jest.config.ts"
+                --     end
+                --     return vim.fn.getcwd() .. "/jest.config.ts"
+                -- end,
+                -- cwd = function()
+                --     local file = vim.fn.expand("%:p")
+                --     if string.find(file, "/packages/") then
+                --         return string.match(file, "(.-/[^/]+/)src")
+                --     end
+                --     return vim.fn.getcwd() .. "/jest.config.ts"
+                -- end,
             }),
         },
         status = { virtual_text = true },

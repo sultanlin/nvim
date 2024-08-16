@@ -1,0 +1,10 @@
+FIX JAVA NOT WORKING
+Replace config.ini with config.ini of your current computer
+
+Steps:
+sudo cp $LSP_JAVA/share/java/jdtls/config_linux/config.ini .
+
+
+TODO:
+Automate this
+Add this to gitignore so that computers don't conflict

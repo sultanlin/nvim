@@ -51,10 +51,6 @@ M.config = function()
             server = {
                 on_attach = function(client, bufnr)
                     my_lsp.on_attach(client, bufnr)
-                    -- require("lsp-inlayhints").setup({
-                    --     inlay_hints = { type_hints = { prefix = "=> " } },
-                    -- })
-                    -- require("lsp-inlayhints").on_attach(client, bufnr)
                     -- require("illuminate").on_attach(client)
 
                     local bufopts = {
@@ -66,7 +62,8 @@ M.config = function()
                     vim.keymap.set("n", "K", "<Cmd>RustLsp hover actions<CR>", bufopts)
                 end,
                 capabilities = my_lsp.capabilities,
-                settings = {
+                -- settings = {
+                default_settings = {
                     -- rust-analyzer language server configuration
                     ["rust-analyzer"] = {
                         assist = {
@@ -153,9 +150,11 @@ M.config = function()
                     },
                 },
             },
-            dap = {
-                adapter = cfg.get_codelldb_adapter(codelldb_path, liblldb_path),
-            },
+            -- Currently broken, try again later
+            -- https://github.com/mrcjkb/rustaceanvim/issues/446
+            -- dap = {
+            --     adapter = cfg.get_codelldb_adapter(codelldb_path, liblldb_path),
+            -- },
         }
     end
     rust_setup()

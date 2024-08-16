@@ -1,6 +1,8 @@
 local M = {
     "mfussenegger/nvim-jdtls",
-    dependencies = {},
+    dependencies = {
+        "JavaHello/spring-boot.nvim",
+    },
     event = { "BufReadPre", "BufNewFile" },
 }
 
@@ -33,6 +35,17 @@ function M.config()
         LSP_JAVA_PATH = "LSP_JAVA"
     end
     -- local LSP_JAVA_PATH = "LSP_JAVA"
+
+    -- FIX: Combine nvim-jdtls and spring-boot somehow
+    require("spring_boot").setup({})
+    -- require("spring_boot").setup({
+    --     -- ls_path = "~/.vscode/extensions/vmware.vscode-spring-boot-1.55.1",
+    --     jdtls_name = "jdtls",
+    --     -- log_file = nil,
+    --     java_cmd = "java",
+    -- })
+
+    -- require("spring_boot").init_lsp_commands()
 
     local function get_jdtls_paths()
         if cache_vars.paths then
@@ -110,6 +123,12 @@ function M.config()
         elseif java_debug_bundle[1] == "" then
             print("debug missing")
         end
+
+        -- Spring boot plugin
+        vim.list_extend(path.bundles, require("spring_boot").java_extensions())
+        -- require("pl.pretty").dump(path.bundles)
+
+        -- print(vim.inspect(path.bundles))
 
         ---
         -- Useful if you're starting jdtls with a Java version that's
@@ -210,6 +229,7 @@ function M.config()
             { desc = "Extract method" }
         )
         vim.keymap.set("n", "<leader>ju", "<Cmd>JdtUpdateConfig<CR>", opts, { desc = "Update config" })
+        vim.keymap.set("n", "<leader>jr", "<Cmd>JdtRestart<CR>", opts, { desc = "Restart LSP" })
     end
 
     local function jdtls_setup(event)
@@ -331,7 +351,7 @@ function M.config()
             },
         }
 
-        -- This starts a new client & server,
+        -- This starts a new require("spring_boot").java_extensions(),client & server,
         -- or attaches to an existing client & server depending on the `root_dir`.
         jdtls.start_or_attach({
             cmd = cmd,
@@ -361,6 +381,16 @@ function M.config()
                 -- FIXME: Maybe check this again? https://github.com/neovim/nvim-lspconfig/blob/master/lua/lspconfig/server_configurations/jdtls.lua#L117
             },
         })
+
+        -- require("spring_boot").setup({})
+        -- require("spring_boot").setup({
+        --     -- ls_path = "~/.vscode/extensions/vmware.vscode-spring-boot-1.55.1",
+        --     jdtls_name = "jdtls",
+        --     -- log_file = nil,
+        --     java_cmd = "java",
+        -- })
+
+        -- require("spring_boot").init_lsp_commands()
     end
 
     vim.cmd(
@@ -374,7 +404,7 @@ function M.config()
 
     vim.api.nvim_create_autocmd("FileType", {
         group = java_cmds,
-        pattern = { "java" },
+        pattern = { "java", "jproperties" },
         desc = "Setup jdtls",
         callback = jdtls_setup,
     })
