@@ -62,6 +62,7 @@ M.config = function()
             bash = { "shfmt", "shellcheck" },
             zsh = { "shfmt", "shellcheck" },
             java = { "google-java-format" },
+            cpp = { "clang-format" },
         },
 
         -- Set format keybind

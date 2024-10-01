@@ -119,6 +119,34 @@ function M.config()
     --         port = 5005,
     --     },
     -- }
+
+    local lsp_codelldb = os.getenv("LSP_CODELLDB")
+    dap.adapters.codelldb = {
+        type = "server",
+        port = "${port}",
+        executable = {
+            command = lsp_codelldb .. "/share/vscode/extensions/vadimcn.vscode-lldb/adapter/codelldb", -- adjust as needed
+            args = { "--port", "${port}" },
+
+            -- On windows you may have to uncomment this:
+            -- detached = false,
+        },
+    }
+    dap.configurations.cpp = {
+        {
+            name = "Launch file",
+            type = "codelldb",
+            request = "launch",
+            program = function()
+                return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
+            end,
+            cwd = "${workspaceFolder}",
+            stopOnEntry = false,
+            --         terminal = "integrated",
+        },
+    }
+
+    dap.configurations.c = dap.configurations.cpp
 end
 
 return M
