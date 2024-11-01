@@ -9,6 +9,14 @@ return {
                 includeInlayPropertyDeclarationTypeHints = true,
                 includeInlayFunctionLikeReturnTypeHints = true,
                 includeInlayEnumMemberValueHints = true,
+
+                -- includeInlayFunctionParameterTypeHints = false,
+                -- includeInlayParameterNameHints = "none",
+                -- includeCompletionsWithClassMemberSnippets = false,
+                -- includeCompletionsWithObjectLiteralMethodSnippets = false,
+                -- includeCompletionsWithSnippetText = false,
+                -- includeInlayVariableTypeHintsWhenTypeMatchesName = false,
+                -- importModuleSpecifierPreference = "non-relative",
             },
         },
         javascript = {
