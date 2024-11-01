@@ -6,22 +6,27 @@ M.config = function()
     lint.linters_by_ft = {
         linters_by_ft = {
             -- markdown = { "vale" }, -- WARN: Vale requires config, not set up
-            javascript = { "eslint_d" },
-            typescript = { "eslint_d" },
-            javascriptreact = { "eslint_d" },
-            typescriptreact = { "eslint_d" },
-            svelte = { "eslint_d" },
+
+            -- javascript = { "eslint_d" },
+            -- typescript = { "eslint_d" },
+            -- javascriptreact = { "eslint_d" },
+            -- typescriptreact = { "eslint_d" },
+            -- svelte = { "eslint_d" },
+
             -- css = { "eslint_d" },
             -- html = { "eslint_d" },
             -- json = { "eslint_d" },
             -- yaml = { "eslint_d" },
             -- graphql = { "eslint_d" },
-            nix = { "statix" },
+            lua = { "selene" },
+            nix = { "nix", "statix" },
             sql = { "sqlfluff" },
             dockerfile = { "hadolint" },
-            -- bash = { "shellcheck" },
-            -- zsh = { "shellcheck" },
+            sh = { "shellcheck" },
+            bash = { "shellcheck" },
+            zsh = { "shellcheck" },
             python = { "ruff" },
+            cpp = { "cppcheck" },
         },
     }
 

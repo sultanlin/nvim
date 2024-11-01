@@ -2,6 +2,18 @@ local M = {}
 
 M.config = function()
     local conform = require("conform")
+    local web_formatters = {
+        "prettierd",
+        "rustywind",
+        "prettier",
+    }
+    local paths = {
+        -- stylua_config = "/home/sultan/.config/nvim/.stylua.toml",
+        stylua_config = vim.fn.expand("$HOME/.config/nvim/.stylua.toml"),
+        prettierd_config = vim.fn.expand("$HOME/.config/nvim/.prettierrc"),
+        -- prettier_config = "/home/sultan/.config/nvim/.prettierrc",
+        -- prettier_config = "linters/prettier.json",
+    }
     conform.setup({
         format_on_save = {
             -- BUG:timing out?!?
@@ -19,9 +31,15 @@ M.config = function()
                     "-aosp",
                 },
             },
+            stylua = {
+                prepend_args = { "--config-path", paths.stylua_config },
+            },
+            shfmt = {
+                prepend_args = { "-i", "2", "-ci", "-bn" },
+            },
             prettierd = {
                 env = {
-                    PRETTIERD_DEFAULT_CONFIG = vim.fn.expand("$HOME/.config/nvim/.prettierrc"),
+                    PRETTIERD_DEFAULT_CONFIG = paths.prettierd_config,
                 },
             },
             prettier = {
@@ -38,14 +56,17 @@ M.config = function()
             lua = { "stylua" },
             -- python = { "ruff_fix ", "ruff_format" },
             -- Use a sub-list to run only the first available formatter
-            javascript = { { "prettierd", "prettier" } },
-            typescript = { { "prettierd", "prettier" } },
-            typescriptreact = { { "prettierd", "prettier" } },
-            javascriptreact = { { "prettierd", "prettier" } },
-            svelte = { { "prettierd", "prettier" } },
-            css = { { "prettierd", "prettier" } },
+            javascript = web_formatters,
+            typescript = web_formatters,
+            typescriptreact = web_formatters,
+            javascriptreact = web_formatters,
+            svelte = web_formatters,
+            css = web_formatters,
+            astro = web_formatters,
             html = { { "prettierd", "prettier" } },
             json = { { "prettierd", "prettier" } },
+            jsonc = { { "prettierd", "prettier" } },
+            -- json = { { "fixjson", "prettierd", "prettier" } },
             yaml = { { "prettierd", "prettier" } },
             -- markdown = { { "prettierd", "prettier" } },
             graphql = { { "prettierd", "prettier" } },
