@@ -36,7 +36,7 @@ local options = {
     -- UI =========================================================================
 
     breakindent = true, -- Indent wrapped lines to match line start
-    colorcolumn = "100", -- Draw colored column one step to the right of desired maximum width
+    -- colorcolumn = "100", -- Draw colored column one step to the right of desired maximum width
     cursorline = true, -- Enable highlighting of the current line    -- WARN: Potentially laggy
     -- laststatus = 2, -- Always show statusline
     -- linebreak = true, -- Wrap long lines at 'breakat' (if 'wrap' is set)
@@ -83,7 +83,7 @@ local options = {
     number = true, -- show numbers on the left
     relativenumber = true, -- set relative numbered lines
     numberwidth = 2, -- set number column width {default 4}
-    -- colorcolumn = "80",
+    colorcolumn = "80",
     cmdheight = 1, -- 0, --- Give more space for displaying messages
     -- scrolloff = 0, -- minimal number of columns to scroll horizontally.  was 8
     scrolloff = 8, -- minimal number of columns to scroll horizontally.
