@@ -21,6 +21,7 @@ M.config = function()
             timeout_ms = 700,
             lsp_fallback = true,
         },
+        log_level = vim.log.levels.DEBUG,
         formatters = {
             -- xmlformat = {
             -- 	cmd = { "xmlformat" },
@@ -63,13 +64,13 @@ M.config = function()
             svelte = web_formatters,
             css = web_formatters,
             astro = web_formatters,
-            html = { { "prettierd", "prettier" } },
-            json = { { "prettierd", "prettier" } },
-            jsonc = { { "prettierd", "prettier" } },
+            html = { "prettierd", "prettier", stop_after_first = true },
+            json = { "prettierd", "prettier", stop_after_first = true },
+            jsonc = { "prettierd", "prettier", stop_after_first = true },
             -- json = { { "fixjson", "prettierd", "prettier" } },
-            yaml = { { "prettierd", "prettier" } },
+            yaml = { "prettierd", "prettier", stop_after_first = true },
             -- markdown = { { "prettierd", "prettier" } },
-            graphql = { { "prettierd", "prettier" } },
+            graphql = { "prettierd", "prettier", stop_after_first = true },
 
             -- cs = { "csharpier" },
             -- markdown = { "mdformat" },
