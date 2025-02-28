@@ -50,6 +50,7 @@ function M.config()
 
     local wk = require("which-key")
     wk.setup({
+        -- preset = "helix",
         plugins = {
             marks = true,
             registers = true,
@@ -67,9 +68,9 @@ function M.config()
                 g = false,
             },
         },
-        window = {
+        win = {
             border = "rounded",
-            position = "bottom",
+            -- position = "bottom",
             padding = { 2, 2, 2, 2 },
         },
         -- ignore_missing = true,
