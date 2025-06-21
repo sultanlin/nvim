@@ -269,7 +269,11 @@ function M.config()
             "-Dosgi.sharedConfiguration.area.readOnly=true",
             "-Dosgi.checkConfiguration=true",
             "-Dosgi.configuration.cascaded=true",
-            "-Dosgi.sharedConfiguration.area=/home/sultan/.config/nvim/java/config_linux",
+            -- "-Dosgi.sharedConfiguration.area=/home/sultan/.config/nvim/java/config_linux",
+            "-Dosgi.sharedConfiguration.area="
+                .. os.getenv(LSP_JAVA_PATH)
+                .. "/share/java/jdtls/config_linux/",
+            -- os.getenv(LSP_JAVA_PATH) .. "/share/java/jdtls/config_linux/",
 
             "-Declipse.product=org.eclipse.jdt.ls.core.product",
             "-Dlog.protocol=true",

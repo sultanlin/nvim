@@ -15,11 +15,16 @@ M.config = function()
         -- prettier_config = "linters/prettier.json",
     }
     conform.setup({
-        format_on_save = {
-            -- BUG:timing out?!?
-            -- timeout_ms = 500,
-            timeout_ms = 700,
-            lsp_fallback = true,
+        -- format_on_save = {
+        --     -- BUG:timing out?!?
+        --     -- timeout_ms = 500,
+        --     -- timeout_ms = 1000,
+        --     timeout_ms = 1250,
+        --     lsp_fallback = true,
+        -- },
+        format_after_save = {
+            -- lsp_fallback = true,
+            lsp_format = "callback",
         },
         log_level = vim.log.levels.DEBUG,
         formatters = {
