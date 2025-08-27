@@ -5,7 +5,7 @@ local M = {
         "nvim-treesitter/nvim-treesitter",
         -- general tests
         "vim-test/vim-test",
-        "nvim-neotest/neotest-vim-test",
+        -- "nvim-neotest/neotest-vim-test",
         -- language specific tests
         "marilari88/neotest-vitest",
         "nvim-neotest/neotest-python",
@@ -57,9 +57,9 @@ function M.config()
             }),
             -- DAP rustacean broken
             -- require("rustaceanvim.neotest"),
-            require("neotest-vim-test")({
-                ignore_file_types = { "python", "vim", "lua", "javascript", "typescript" },
-            }),
+            -- require("neotest-vim-test")({
+            --     ignore_file_types = { "python", "vim", "lua", "javascript", "typescript" },
+            -- }),
             require("neotest-jest")({
                 -- jestConfigFile = function()
                 --     local file = vim.fn.expand("%:p")
