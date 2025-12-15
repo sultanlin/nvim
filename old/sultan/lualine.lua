@@ -28,7 +28,8 @@ M.config = function()
                 {
                     "mode",
                     fmt = function(str)
-                        return str:lower():sub(1, 1)
+                        -- return str:lower():sub(1, 1)
+                        return str:sub(1, 1)
                     end,
                 },
             },

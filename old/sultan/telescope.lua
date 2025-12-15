@@ -71,14 +71,13 @@ M.config = function()
 
     local telescope = require("telescope")
     local actions = require("telescope.actions")
-    local icons = require("sultan.core.icons")
 
     telescope.setup({
         defaults = {
             -- path_display = { "truncate " },
             -- path_display = { "filename_first" },
-            prompt_prefix = icons.ui.Telescope .. " ",
-            selection_caret = icons.ui.Forward .. " ",
+            prompt_prefix = " " .. " ",
+            selection_caret = " " .. " ",
             entry_prefix = "   ",
             initial_mode = "insert",
             selection_strategy = "reset",

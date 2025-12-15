@@ -1,5 +1,6 @@
 local M = {
     "andymass/vim-matchup",
+    event = "VeryLazy",
 }
 
 function M.config()

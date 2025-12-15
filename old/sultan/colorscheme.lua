@@ -33,17 +33,18 @@ M.config = function()
     -- Pick colorscheme here
     -- local colorscheme = "catppuccin"
     -- local colorscheme = "rose-pine"
-    local colorscheme = "gruvbox"
+    -- local colorscheme = "gruvbox"
+    -- local colorscheme = "tokyonight"
     -- local colorscheme = "gruvbox-material"
-    -- local colorscheme = "kanagawa"
-    ColorMyPencils(colorscheme, true)
+    local colorscheme = "kanagawa"
+    ColorMyPencils(colorscheme, false)
 end
 
 M.colors = function()
     require("tokyonight").setup({
-        style = "storm", -- The theme comes in three styles, 'storm', 'moon', a darker variant 'night' and 'day'
+        -- style = "storm", -- The theme comes in three styles, 'storm', 'moon', a darker variant 'night' and 'day'
         -- style = "moon", -- The theme comes in three styles, 'storm', 'moon', a darker variant 'night' and 'day'
-        -- style = "night", -- The theme comes in three styles, 'storm', 'moon', a darker variant 'night' and 'day'
+        style = "night", -- The theme comes in three styles, 'storm', 'moon', a darker variant 'night' and 'day'
         -- transparent = true, -- Enable this to disable setting the background color
         transparent = false, -- Enable this to disable setting the background color
         terminal_colors = true, -- Configure the colors used when opening a ':terminal' in neovim
@@ -55,6 +56,17 @@ M.colors = function()
             sidebars = "dark", -- style for sidebars, see below
             floats = "dark", -- style for floating windows
         },
+        sidebars = { "qf", "help", "neo-tree", "terminal", "packer" }, -- Set a darker background on sidebar-like windows
+        day_brightness = 0.3, -- Adjusts the brightness of the colors of the **Day** style
+        hide_inactive_statusline = false, -- Enabling this option, will hide inactive statuslines
+        dim_inactive = false, -- dims inactive windows
+        lualine_bold = true, -- When `true`, section headers in the lualine theme will be bold
+
+        -- --- You can override specific color groups to use other groups or a hex color
+        -- --- function will be called with a ColorScheme table
+        -- on_colors = function(colors)
+        -- 	colors.bg = "#14161b"
+        -- end,
         -- lualine_bold = true, -- When `true`, section headers in the lualine theme will be bold
     })
 
@@ -70,7 +82,7 @@ M.colors = function()
     })
 
     require("gruvbox").setup({
-        transparent_mode = true,
+        transparent_mode = false,
         italic = {
             strings = false,
             emphasis = false,
@@ -87,24 +99,24 @@ M.colors = function()
         --     dark = "wave", -- try "dragon" !
         --     light = "lotus",
         -- },
-        commentStyle = { italic = false },
-        keywordStyle = { italic = false },
-        transparent = true, -- do not set background color
+        -- commentStyle = { italic = false },
+        -- keywordStyle = { italic = false },
+        -- transparent = true, -- do not set background color
         terminalColors = true, -- define vim.g.terminal_color_{0,17}
     })
 
     require("rose-pine").setup({
         -- variant = "auto", -- auto, main, moon, or dawn
         styles = {
-            transparency = true,
+            -- transparency = true,
             italic = false,
         },
     })
 
     require("nightfox").setup({
-        options = {
-            transparent = true, -- Disable setting background
-        },
+        -- options = {
+        --     transparent = true, -- Disable setting background
+        -- },
     })
 
     require("onedark").setup({
@@ -149,7 +161,6 @@ M.colors = function()
     -- gruvbox-material
     vim.g.gruvbox_material_disable_italic_comment = 1
     -- Choose 0, 1 or 2. 2 is more transparent (ex statusline). 0 to turn off transparent
-    vim.g.gruvbox_material_transparent_background = 1
 
     -- Nord setup
     vim.g.nord_disable_background = true
@@ -182,6 +193,7 @@ function ColorMyPencils(color, transparent)
         vim.api.nvim_set_hl(0, "NonText", { bg = "none" })
         vim.api.nvim_set_hl(0, "Text", { bg = "none" })
         vim.api.nvim_set_hl(0, "CursorLineNr", { bg = "none" })
+        vim.g.gruvbox_material_transparent_background = 1
     end
 end
 
