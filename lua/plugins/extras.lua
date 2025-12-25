@@ -1,3 +1,5 @@
+---@module 'lazy'
+---@type LazySpec
 return {
     {
         "b0o/schemastore.nvim",
@@ -18,6 +20,11 @@ return {
         config = function()
             vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle, { desc = "Undotree" })
         end,
+    },
+    {
+        "NMAC427/guess-indent.nvim",
+        event = { "BufReadPost", "BufNewFile" },
+        opts = {},
     },
 
     -- {

@@ -8,7 +8,7 @@ local options = {
     expandtab = true, -- convert tabs to spaces
     tabstop = tablength, -- number of spaces when you tab
     -- smarttab = true, --- Makes tabbing smarter will realize you have 2 vs 4
-    -- smartindent = true, -- make indenting smarter again
+    smartindent = true, -- make indenting smarter again -- WARN: Experimenting
     shiftwidth = tablength, -- indent when using >> or <<
     ignorecase = true, -- ignore case when searching
     -- incsearch = true, --- Start searching before pressing enter
@@ -33,21 +33,13 @@ local options = {
     termguicolors = true, -- Enables 24-bit RGB color in the TUI
     wrap = false, -- Display long lines as just one line
 
-    fillchars = table.concat({
-        eob = " ",
-        fold = " ",
-        diff = "╱",
-        foldopen = "",
-        foldsep = " ",
-        foldclose = "",
-        lastline = " ",
-        stl = " ",
-    }), -- make EndOfBuffer invisible
+    fillchars = table.concat({ eob = " ", diff = "╱", lastline = " ", stl = " " }), -- make EndOfBuffer invisible
     number = true, -- show numbers on the left
     relativenumber = true, -- set relative numbered lines
     numberwidth = 2, -- set number column width {default 4}
     cmdheight = 1, -- 0, --- Give more space for displaying messages
-    scrolloff = 0, -- minimal number of columns to scroll horizontally.
+    -- scrolloff = 0, -- minimal number of columns to scroll horizontally.
+    scrolloff = 8, -- minimal number of screen columns
     sidescrolloff = 8, -- minimal number of screen columns
     completeopt = { "menuone", "noselect" }, -- mostly just for cmp
     hidden = true, -- required to keep multiple buffers and open multiple buffers

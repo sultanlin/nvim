@@ -43,6 +43,9 @@ return {
         Unit = "",
         Value = "",
         Variable = "󰀫",
+        Codeium = "󰚩 ",
+        Copilot = " ",
+        LazyDev = "b ",
     },
 
     --- Shared icons that don't really fit into a category.
@@ -57,6 +60,10 @@ return {
         terminal = "",
         toolbox = "󰦬",
         vertical_bar = "│",
+    },
+    ui = {
+        ChevronRight = "",
+        ChevronShortRight = "",
     },
 }
 -- {

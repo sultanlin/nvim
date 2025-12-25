@@ -1,9 +1,12 @@
+-- nice built-in colorschemes: slate, unokai, retrobox, default, habamax
 return {
     -- https://github.com/tiagovla/tokyodark.nvim
     {
         "folke/tokyonight.nvim",
         -- event = "VeryLazy",
         -- lazy = true,
+        lazy = false,
+        priority = 1000,
         opts = {
             -- style = "moon", -- The theme comes in three styles, 'storm', 'moon', a darker variant 'night' and 'day'
             style = "night", -- The theme comes in three styles, `storm`, `moon`, a darker variant `night` and `day`
@@ -55,7 +58,7 @@ return {
         },
         config = function(_, opts)
             require("tokyonight").setup(opts)
-            -- vim.cmd.colorscheme("tokyonight")
+            vim.cmd.colorscheme("tokyonight")
         end,
     },
     {
@@ -182,7 +185,7 @@ return {
         },
         config = function(_, opts)
             require("nightfox").setup(opts)
-            vim.cmd.colorscheme("nightfox")
+            -- vim.cmd.colorscheme("carbonfox")
         end,
     },
     {
@@ -267,6 +270,12 @@ return {
     {
         "ribru17/bamboo.nvim",
         event = "VeryLazy",
+        config = function()
+            require("bamboo").setup({
+                -- optional configuration here
+            })
+            -- require("bamboo").load()
+        end,
     },
     {
         "projekt0n/github-nvim-theme",

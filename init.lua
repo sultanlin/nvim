@@ -4,7 +4,6 @@ require("config.autocommands")
 require("config.lazy")
 require("config.lsp")
 -- Check out overseer
--- Check out grapple
 -- Review lazy and git folder plugins (and move them out of that folder)
 -- Check out LazyVim keymaps
 --      neorg

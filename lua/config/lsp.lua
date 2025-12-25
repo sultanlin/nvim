@@ -202,8 +202,14 @@ vim.api.nvim_create_autocmd("LspAttach", {
             require("snacks.picker").lsp_outgoing_calls()
         end, opts)
 
-        opts.desc = "LSP Info"
-        keymap.set("n", "<leader>li", "<cmd>LspInfo<cr>", opts)
+        -- opts.desc = "LSP Info"
+        -- keymap.set("n", "<leader>li", "<cmd>LspInfo<cr>", opts)
+
+        opts.desc = "Inspect TS Node"
+        keymap.set("n", "<leader>ci", "<cmd>Inspect<cr>")
+
+        opts.desc = "Inspect TS Tree"
+        keymap.set("n", "<leader>cI", "<cmd>InspectTree<cr>")
 
         opts.desc = "Refresh code lenses"
         keymap.set("n", "<leader>ly", vim.lsp.codelens.refresh, opts)
