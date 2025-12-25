@@ -5,7 +5,6 @@ require("config.lazy")
 require("config.lsp")
 -- Check out overseer
 -- Check out grapple
--- Review barbecue(archived) vs navic vs lualine vs dropbar
 -- Review lazy and git folder plugins (and move them out of that folder)
 -- Check out LazyVim keymaps
 --      neorg
