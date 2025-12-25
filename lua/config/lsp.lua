@@ -121,22 +121,22 @@ vim.api.nvim_create_autocmd("LspAttach", {
         end
 
         -- set keybinds
-        opts.desc = "Show LSP references"
+        opts.desc = "References"
         keymap.set("n", "gr", function()
             require("snacks.picker").lsp_references()
         end, opts)
 
-        opts.desc = "Go to declaration"
+        opts.desc = "Goto declaration"
         keymap.set("n", "gD", function()
             require("snacks.picker").lsp_declarations()
         end, opts)
 
-        opts.desc = "Show LSP definitions"
+        opts.desc = "Goto definitions"
         keymap.set("n", "gd", function()
             require("snacks.picker").lsp_definitions()
         end, opts)
 
-        opts.desc = "Show LSP implementations"
+        opts.desc = "Goto implementations"
         keymap.set("n", "gi", function()
             require("snacks.picker").lsp_implementations()
         end, opts)
@@ -146,7 +146,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
             require("snacks.picker").lsp_type_definitions()
         end, opts)
 
-        opts.desc = "See available code actions"
+        opts.desc = "Code actions"
         keymap.set({ "n", "v" }, "<leader>la", vim.lsp.buf.code_action, opts)
 
         opts.desc = "Smart rename"
@@ -183,21 +183,21 @@ vim.api.nvim_create_autocmd("LspAttach", {
         keymap.set({ "n", "i" }, "gK", vim.lsp.buf.signature_help, opts)
 
         opts.desc = "Show LSP Symbols"
-        keymap.set("n", "<leader>ss", function()
+        keymap.set("n", "<leader>ls", function()
             require("snacks.picker").lsp_symbols()
         end, opts)
 
         opts.desc = "Show LSP Workspace Symbols"
-        keymap.set("n", "<leader>sS", function()
+        keymap.set("n", "<leader>lS", function()
             require("snacks.picker").lsp_workspace_symbols()
         end, opts)
 
-        opts.desc = "Show c[a]lls incoming"
+        opts.desc = "Show calls incoming"
         keymap.set("n", "gai", function()
             require("snacks.picker").lsp_incoming_calls()
         end, opts)
 
-        opts.desc = "Show c[a]lls outgoing"
+        opts.desc = "Show calls outgoing"
         keymap.set("n", "gao", function()
             require("snacks.picker").lsp_outgoing_calls()
         end, opts)
