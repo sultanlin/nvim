@@ -117,6 +117,21 @@ return {
                     vim.wo.foldlevel = 99
                     vim.wo.foldmethod = "expr"
                     vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()" -- Use treesitter for folds
+                    vim.o.foldtext = "" -- Remove line number in fold
+                    vim.opt.foldcolumn = "0"
+                    vim.opt.fillchars:append({ fold = " ", foldopen = "", foldsep = " ", foldclose = "" })
+                    vim.api.nvim_create_autocmd("LspAttach", {
+                        callback = function(args)
+                            local client = vim.lsp.get_client_by_id(args.data.client_id)
+                            if not client then
+                                return
+                            end
+                            if client:supports_method("textDocument/foldingRange") then
+                                local win = vim.api.nvim_get_current_win()
+                                vim.wo[win][0].foldexpr = "v:lua.vim.lsp.foldexpr()"
+                            end
+                        end,
+                    })
 
                     -- TS Indent
                     -- vim.bo[bufnr].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()" -- Use treesitter for indentation

@@ -29,30 +29,6 @@ return {
             },
         },
         --stylua: ignore
-            -- -- set keybinds
-            -- opts.desc = "Show LSP references"
-            -- keymap.set("n", "gr", "<cmd>FzfLua lsp_references<CR>", opts)
-            --
-            -- opts.desc = "Go to declaration"
-            -- keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
-            --
-            -- opts.desc = "Show LSP definitions"
-            -- keymap.set("n", "gd", "<cmd>FzfLua lsp_definitions<CR>", opts)
-            --
-            -- opts.desc = "Show LSP implementations"
-            -- keymap.set("n", "gi", "<cmd>FzfLua lsp_implementations<CR>", opts)
-            --
-            -- opts.desc = "Show LSP type definitions"
-            -- keymap.set("n", "gt", "<cmd>FzfLua lsp_typedefs<CR>", opts)
-            --
-            -- opts.desc = "See available code actions"
-            -- keymap.set({ "n", "v" }, "<leader>la", vim.lsp.buf.code_action, opts)
-            --
-            -- opts.desc = "Smart rename"
-            -- keymap.set("n", "<leader>lr", vim.lsp.buf.rename, opts)
-            --
-            -- opts.desc = "Show buffer diagnostics"
-            -- keymap.set("n", "<leader>ld", "<cmd>FzfLua diagnostics_document<CR>", opts)
         keys = {
             -- Top Pickers & Explorer
             { "<leader><space>", function() Snacks.picker.smart() end, desc = "Smart Find Files" },
