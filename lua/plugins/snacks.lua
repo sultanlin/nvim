@@ -66,8 +66,12 @@ return {
             -- git
             { "<leader>gb", function() Snacks.picker.git_branches() end, desc = "Git Branches" },
             -- TODO: Sort keymaps (conflicting)
-            -- { "<leader>gl", function() Snacks.picker.git_log() end, desc = "Git Log" },
-            -- { "<leader>gL", function() Snacks.picker.git_log_line() end, desc = "Git Log Line" },
+            { "<leader>gl", function() Snacks.picker.git_log() end, desc = "Git Log" },
+            { "<leader>gL", function() Snacks.picker.git_log_line() end, desc = "Git Log Line" },
+            { "<leader>gz", function() Snacks.picker.git_status() end, desc = "Git Status" },
+            { "<leader>gZ", function() Snacks.picker.git_stash() end, desc = "Git Stash" },
+            { "<leader>gf", function() Snacks.picker.git_diff() end, desc = "Git Diff (Hunks)" },
+            { "<leader>gF", function() Snacks.picker.git_log_file() end, desc = "Git Log File" },
             -- { "<leader>gs", function() Snacks.picker.git_status() end, desc = "Git Status" },
             -- { "<leader>gS", function() Snacks.picker.git_stash() end, desc = "Git Stash" },
             -- { "<leader>gd", function() Snacks.picker.git_diff() end, desc = "Git Diff (Hunks)" },

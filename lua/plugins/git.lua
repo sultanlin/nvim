@@ -62,87 +62,54 @@ return {
                 keymap("n", "<leader>gP", gs.preview_hunk_inline, "Preview Hunk Inline")
                 keymap({ "n", "x" }, "<leader>gs", gs.stage_hunk, "Stage Hunk")
                 keymap({ "n", "x" }, "<leader>gr", gs.reset_hunk, "Reset Hunk")
-                -- keymap("n", "<leader>gS", gs.stage_buffer, "Stage Buffer")
+                keymap("n", "<leader>gS", gs.stage_buffer, "Stage Buffer")
                 keymap("n", "<leader>gR", gs.reset_buffer, "Reset Buffer")
                 keymap("n", "<leader>gu", gs.undo_stage_hunk, "Undo Stage Hunk")
+                keymap({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", "GitSigns Select Hunk")
+
+                vim.keymap.set({ "n", "v" }, "]h", function()
+                    if vim.wo.diff then
+                        vim.cmd.normal({ "]c", bang = true })
+                    else
+                        -- gs.next_hunk()
+                        gs.nav_hunk("next")
+                    end
+                    return "<Ignore>"
+                end, { expr = true, buffer = buffer, desc = "Next hunk" })
+                vim.keymap.set({ "n", "v" }, "[h", function()
+                    if vim.wo.diff then
+                        vim.cmd.normal({ "[c", bang = true })
+                    else
+                        -- gs.prev_hunk()
+                        gs.nav_hunk("prev")
+                    end
+                    return "<Ignore>"
+                end, { expr = true, buffer = buffer, desc = "Previous hunk" })
+                keymap("n", "]H", function()
+                    gs.nav_hunk("last")
+                end, "Last Hunk")
+                keymap("n", "[H", function()
+                    gs.nav_hunk("first")
+                end, "First Hunk")
+
                 -- keymap("n", "<leader>gd", gs.diffthis, "Git diff")
                 -- keymap("n", "<leader>gD", function()
                 --     gs.diffthis("~")
                 -- end, "Git diff ~")
 
+                -- keymap("n", "<leader>gt", gs.toggle_current_line_blame, "git toggle show blame line")
                 -- keymap("n", "<leader>gl", function()
                 --     gs.blame_line({ full = true })
                 -- end, "Blame Line")
-                keymap("n", "<leader>gl", gs.blame, "Blame Buffer")
-                keymap({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", "GitSigns Select Hunk")
-
-                keymap("n", "<leader>gj", function()
-                    gs.next_hunk({ navigation_message = false })
-                end, "Next Hunk")
-                keymap("n", "<leader>gk", function()
-                    gs.prev_hunk({ navigation_message = false })
-                end, "Prev Hunk")
-                keymap("n", "<leader>gJ", function()
-                    gs.nav_hunk("last")
-                end, "Last Hunk")
-                keymap("n", "<leader>gK", function()
-                    gs.nav_hunk("first")
-                end, "First Hunk")
+                -- keymap("n", "<leader>gl", gs.blame, "Blame Buffer")
             end,
-            -- on_attach = function(bufnr)
-            --     vim.keymap.set(
-            --         "n",
-            --         "<leader>hp",
-            --         require("gitsigns").preview_hunk,
-            --         { buffer = bufnr, desc = "Preview git hunk" }
-            --     )
-            --
-            --     don't override the built-in and fugitive keymaps
-            --     local gs = package.loaded.gitsigns
-            --     vim.keymap.set({ "n", "v" }, "]c", function()
-            --         if vim.wo.diff then
-            --             return "]c"
-            --         end
-            --         vim.schedule(function()
-            --             gs.next_hunk()
-            --         end)
-            --         return "<Ignore>"
-            --     end, { expr = true, buffer = bufnr, desc = "Jump to next hunk" })
-            --     vim.keymap.set({ "n", "v" }, "[c", function()
-            --         if vim.wo.diff then
-            --             return "[c"
-            --         end
-            --         vim.schedule(function()
-            --             gs.prev_hunk()
-            --         end)
-            --         return "<Ignore>"
-            --     end, { expr = true, buffer = bufnr, desc = "Jump to previous hunk" })
-            -- end,
-
-            -- LazyVim
-            --       map({"n", "v"}, "]h", function()
-            --         if vim.wo.diff then
-            --           vim.cmd.normal({ "]c", bang = true })
-            --         else
-            --           gs.nav_hunk("next")
-            --         end
-            --       end, "Next Hunk")
-            --       map({"n", "v"}, "[h", function()
-            --         if vim.wo.diff then
-            --           vim.cmd.normal({ "[c", bang = true })
-            --         else
-            --           gs.nav_hunk("prev")
-            --         end
-            --       end, "Prev Hunk")
-            --       map("n", "]H", function() gs.nav_hunk("last") end, "Last Hunk")
-            --       map("n", "[H", function() gs.nav_hunk("first") end, "First Hunk")
         },
     },
     {
         -- Diffs for git revisions.
         "sindrets/diffview.nvim",
         keys = {
-            { "<leader>gf", "<cmd>DiffviewFileHistory<cr>", desc = "File history" },
+            { "<leader>gD", "<cmd>DiffviewFileHistory<cr>", desc = "File history" },
             { "<leader>gd", "<cmd>DiffviewOpen<cr>", desc = "Diff view" },
         },
         opts = function()
