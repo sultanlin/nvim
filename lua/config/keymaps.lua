@@ -46,6 +46,7 @@ opts.desc = "Decrease Window Height"
 keymap("n", "<C-Down>", ":resize +2<CR>", opts)
 keymap("n", "<C-Left>", ":vertical resize -2<CR>", opts)
 -- Move current line / block with Alt-j/k ala vscode.
+opts.desc = ""
 keymap("n", "<A-j>", ":m .+1<CR>==", opts)
 keymap("n", "<A-k>", ":m .-2<CR>==", opts)
 -- QuickFix TODO: Check conflict/if I need it
@@ -128,7 +129,6 @@ keymap({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save File" 
 --keywordprg
 keymap("n", "<leader>K", "<cmd>norm! K<cr>", { desc = "Keywordprg" })
 
--- TODO: Consider replacing tabby with this
 -- tabs
 keymap("n", "<leader><tab>l", "<cmd>tablast<cr>", { desc = "Last Tab" })
 keymap("n", "<leader><tab>o", "<cmd>tabonly<cr>", { desc = "Close Other Tabs" })
@@ -145,3 +145,23 @@ keymap("n", "<leader><tab>[", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
 -- { "<leader>al", "<cmd>+tabmove<cr>", desc = "Move Right" },
 -- { "<leader>an", "<cmd>tabnew %<cr>", desc = "New Tab" },
 -- { "<leader>ao", "<cmd>tabonly<cr>", desc = "Only" },
+
+-- -- Some more convenient keymaps for split management
+keymap("n", "<leader>wv", "<C-w>v", { desc = "Window split vertically" })
+keymap("n", "<leader>w<Bslash>", "<C-w>v", { desc = "Window split vertically" })
+keymap("n", "<leader>w|", "<C-w>v", { desc = "Window split vertically" })
+keymap("n", "<leader>wh", "<C-w>s", { desc = "Window split horizontally" })
+keymap("n", "<leader>w-", "<C-w>s", { desc = "Window split horizontally" })
+keymap("n", "<leader>we", "<C-w>=", { desc = "Make Window splits equal size" })
+keymap("n", "<leader>w=", "<C-w>=", { desc = "Make Window splits equal size" })
+keymap("n", "<leader>wq", "<cmd>close<CR>", { desc = "Quit window" })
+keymap("n", "<leader>wo", "<C-w>o", { desc = "Close other windows" })
+keymap("n", "<leader>wm", "<C-w>o", { desc = "Maximize" })
+keymap("n", "<leader>wH", "<C-w>H", { desc = "Move window left" })
+keymap("n", "<leader>wL", "<C-w>L", { desc = "Move window right" })
+keymap("n", "<leader>wJ", "<C-w>J", { desc = "Move window down" })
+keymap("n", "<leader>wK", "<C-w>K", { desc = "Move window up" })
+
+-- Quickly go to the start/end of the line while in insert mode.
+keymap("i", "<C-a>", "<C-o>I", { desc = "Go to the start of the line" })
+keymap("i", "<C-e>", "<C-o>A", { desc = "Go to the end of the line" })

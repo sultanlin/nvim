@@ -7,7 +7,7 @@ return {
     end,
     config = function()
         local mappings = {
-            { "<leader>-", "<cmd>nohlsearch<CR>", desc = "NOHL" },
+            { "<esc>", "<cmd>nohlsearch<CR>", desc = "NOHL" },
             { "<leader>;", "<cmd>tabnew | terminal<CR>", desc = "[T]erminal" },
             -- { "<leader>a", group = "Tab" },
             { "<leader><tab>", group = "Tab" },
@@ -21,13 +21,13 @@ return {
             { "<leader>d", group = "Debug" },
             { "<leader>f", group = "Find" },
             { "<leader>g", group = "Git" },
-            { "<leader>h", "<cmd>split<CR>", desc = "Horizontal Split" },
             { "<leader>l", group = "LSP" },
             { "ga", group = "LSP calls" },
             { "<leader>q", "<cmd>confirm q<CR>", desc = "Quit" },
             { "<leader>s", group = "Search" },
             { "<leader>t", group = "Test" },
-            { "<leader>v", "<cmd>vsplit<CR>", desc = "Split" },
+            -- { "<leader>h", "<cmd>split<CR>", desc = "Horizontal Split" },
+            -- { "<leader>v", "<cmd>vsplit<CR>", desc = "Split" },
             { "<leader>x", "<cmd>x<CR>", desc = "Write and Quit" },
             { "z", group = "Fold" },
             { "zo", desc = "Open fold under cursor" },
@@ -41,6 +41,7 @@ return {
             { "zr", desc = "Open 1 fold layer in file" },
             { "zM", desc = "Close all fold layer in file" },
             { "zR", desc = "Open all fold layer in file" },
+            { "w", group = "Window" },
         }
 
         local wk = require("which-key")
