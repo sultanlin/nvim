@@ -1,29 +1,25 @@
 return {
     "nvim-lualine/lualine.nvim",
     lazy = false,
-    dependencies = { "nvim-tree/nvim-web-devicons" },
+    dependencies = { { "nvim-tree/nvim-web-devicons", lazy = true }, "bwpge/lualine-pretty-path" },
     config = function()
         local lualine = require("lualine")
         local lazy_status = require("lazy.status") -- to configure lazy pending updates count
+        local icons = require("icons")
 
         lualine.setup({
             options = {
-                theme = "auto",
-                icons_enabled = true,
+
+                -- default = { left = "", right = "" },
+                -- round = { left = "", right = "" },
+                -- block = { left = "█", right = "█" },
+                -- arrow = { left = "", right = "" },
                 component_separators = { left = "", right = "" },
-                section_separators = { left = "", right = "" },
-                disabled_filetypes = {
-                    statusline = {},
-                    winbar = {},
-                },
-                ignore_focus = {},
-                always_divide_middle = true,
+                -- section_separators = { left = "", right = "" },
+                disabled_filetypes = { statusline = { "dashboard", "alpha", "ministarter", "snacks_dashboard" } },
                 globalstatus = true, -- single statusline for all windows
-                refresh = {
-                    statusline = 1000,
-                    tabline = 1000,
-                    winbar = 1000,
-                },
+                section_separators = { left = "", right = "" },
+                -- component_separators = { left = "", right = "" },
             },
 
             sections = {
@@ -31,63 +27,47 @@ return {
                 lualine_b = {
                     "branch",
                     "diff",
+                },
+                lualine_c = {
+                    "pretty_path",
+                }, -- NOTE: consider replacing it with project root folder
+                lualine_x = {
                     {
                         "diagnostics",
-                        sources = { "nvim_diagnostic", "nvim_lsp" },
-                        sections = { "error", "warn", "info", "hint" },
-                        diagnostics_color = {
-                            error = "DiagnosticError",
-                            warn = "DiagnosticWarn",
-                            info = "DiagnosticInfo",
-                            hint = "DiagnosticHint",
-                        },
+                        -- sources = { "nvim_workspace_diagnostic", "nvim_lsp" }, -- diagnostics for entire workspace
+                        sources = { "nvim_diagnostic", "nvim_lsp" }, -- diagnostics for active buffer
                         symbols = {
-                            error = "" .. " ",
-                            warn = "" .. " ",
-                            info = "" .. " ",
-                            hint = "󰌶" .. " ",
+                            -- error = "" .. " ",
+                            -- warn = "" .. " ",
+                            -- info = "" .. " ",
+                            -- hint = "󰌶" .. " ",
+                            error = "" .. " ",
+                            warn = "" .. " ",
+                            hint = "" .. " ",
+                            info = "" .. " ",
                         },
-                        colored = true,
-                        update_in_insert = false,
-                        always_visible = false,
                     },
                 },
-                lualine_c = {},
-                lualine_x = {
+                lualine_y = {
                     {
                         lazy_status.updates,
                         cond = lazy_status.has_updates,
-                        -- color = { fg = "#ff9e64" },
+                        color = { fg = "#ff9e64" },
+                        padding = { left = 1, right = 0 },
                     },
-                    { "encoding" },
-                    { "fileformat" },
-                    {
-                        "filetype",
-                        -- icon_only = true,
-                    },
+                    { "fileformat", separator = "", padding = { left = 1, right = 2 } }, -- Penguin
                 },
-                lualine_y = { "progress" },
-                lualine_z = { "location" },
+                lualine_z = {
+                    { "progress", separator = "", padding = { left = 0, right = 0 } },
+                    { "location", padding = { left = 0, right = 1 } },
+                },
             },
             inactive_sections = {
-                lualine_a = {},
-                lualine_b = {},
-                lualine_c = {
-                    {
-                        "filename",
-                        file_status = true,
-                        path = 1,
-                    },
-                },
-                lualine_x = { "location" },
-                lualine_y = {},
-                lualine_z = {},
+                lualine_b = { { "filename", path = 3, status = true } },
+                lualine_c = { { "filename", file_status = true, path = 1 } },
             },
 
-            tabline = {},
-            winbar = {},
-            inactive_winbar = {},
-            -- extensions = { "quickfix", "man", "fugitive", "toggleterm" },
+            extensions = { "lazy", "fzf", "quickfix", "man", "fugitive", "toggleterm" },
         })
     end,
 }
