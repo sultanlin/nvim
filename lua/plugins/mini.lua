@@ -43,6 +43,7 @@ return {
                 "JoosepAlviste/nvim-ts-context-commentstring",
                 event = "VeryLazy",
             },
+            "echasnovski/mini.extra",
         },
         opts = function()
             local ai = require("mini.ai")
@@ -53,13 +54,19 @@ return {
                 -- ? is user prompt. For example, vi?
                 n_lines = 500,
                 custom_textobjects = {
-                    o = ai.gen_spec.treesitter({
+                    -- o = ai.gen_spec.treesitter({
+                    --     a = { "@block.outer", "@conditional.outer", "@loop.outer" },
+                    --     i = { "@block.inner", "@conditional.inner", "@loop.inner" },
+                    -- }, {}),
+                    s = ai.gen_spec.treesitter({
                         a = { "@block.outer", "@conditional.outer", "@loop.outer" },
                         i = { "@block.inner", "@conditional.inner", "@loop.inner" },
                     }, {}),
-                    -- f = require("mini.ai").gen_spec.treesitter({ a = "@function.outer", i = "@function.inner" }, {}),
-                    -- c = require("mini.ai").gen_spec.treesitter({ a = "@class.outer", i = "@class.inner" }, {}),
-                    -- t = { "<([%p%w]-)%f[^<%w][^<>]->.-</%1>", "^<.->().*()</[^/]->$" },
+                    f = require("mini.ai").gen_spec.treesitter({ a = "@function.outer", i = "@function.inner" }, {}),
+                    c = require("mini.ai").gen_spec.treesitter({ a = "@class.outer", i = "@class.inner" }, {}),
+                    i = require("mini.extra").gen_ai_spec.indent(),
+                    g = require("mini.extra").gen_ai_spec.buffer(), -- t = { "<([%p%w]-)%f[^<%w][^<>]->.-</%1>", "^<.->().*()</[^/]->$" },
+                    --         -- t = { "<([%p%w]-)%f[^<%w][^<>]->.-</%1>", "^<.->().*()</[^/]->$" },
                 },
             }
         end,
