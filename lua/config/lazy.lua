@@ -15,16 +15,16 @@ vim.opt.rtp:prepend(lazypath)
 -- print(colorscheme)
 require("lazy").setup({
     spec = {
-        { import = "plugins.colorscheme" },
+        -- { import = "plugins.colorscheme" },
         { import = "plugins" },
         -- { "colors", import = "plugins.colors" },
         { import = "plugins.lsp" },
         -- { import = "plugins.extras" },
-        -- { import = "plugins.colors" },
+        { import = "plugins.colors" },
     },
     install = {
         missing = true,
-        colorscheme = { "kanagawa", "habamax" },
+        colorscheme = { vim.g.colorscheme, "habamax" },
     },
     change_detection = {
         enabled = true,

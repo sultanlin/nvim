@@ -1,3 +1,4 @@
+vim.g.colorscheme = os.getenv("COLORSCHEME") or "tokyonight"
 require("config.options")
 require("config.keymaps")
 require("config.autocommands")

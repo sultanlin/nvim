@@ -1,5 +1,13 @@
 return {
-    "Shatur/neovim-ayu",
-    lazy = false, -- make sure we load this during startup if it is your main colorscheme
-    priority = 1000, -- make sure to load this before all the other start plugins
+    "ribru17/bamboo.nvim",
+    cond = vim.g.colorscheme == "bamboo",
+    lazy = false,
+    priority = 1000,
+    config = function()
+        require("bamboo").setup({
+            -- optional configuration here
+        })
+        require("bamboo").load()
+        vim.cmd.colorscheme("bamboo")
+    end,
 }
