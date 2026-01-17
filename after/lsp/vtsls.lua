@@ -11,6 +11,7 @@ return {
                             .. "/lib/language-tools/packages/language-server",
                         languages = { "vue" },
                         configNamespace = "typescript",
+                        enableForWorkspaceTypeScriptVersions = true,
                     },
                 },
             },

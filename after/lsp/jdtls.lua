@@ -302,7 +302,7 @@ return {
         ["language/status"] = function(_, result) end, -- Stops loading/loaded message when opening java files
         ["$/progress"] = function(_, result, ctx) end, -- disable progress updates.
     },
-    filetypes = { "java", "jproperties" },
+    filetypes = { "java", "jproperties", "typescript" },
 }
 -- setup = {
 --     commands = {
