@@ -16,7 +16,7 @@ return {
         },
         keys = {
             {
-                "<leader>m",
+                "m",
                 function()
                     local grapple = require("grapple")
                     grapple.toggle()
@@ -29,6 +29,7 @@ return {
                 desc = "Tag buffer (Grapple)",
             },
             { "<c-b>", "<cmd>Grapple cycle_tags next<cr>", desc = "Grapple next tag" },
+            { "'", "<cmd>Grapple toggle_tags<cr>", desc = "Grapple menu" },
             { "<leader>bb", "<cmd>Grapple toggle_tags<cr>", desc = "Grapple menu" },
             { "<leader>bk", "<cmd>Grapple cycle_tags next<cr>", desc = "Grapple next tag" },
             { "<leader>bj", "<cmd>Grapple cycle_tags prev<cr>", desc = "Grapple previous tag" },

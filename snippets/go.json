@@ -1,0 +1,185 @@
+{
+  "Package": {
+    "prefix": "pkg",
+    "body": ["package ${1:main}"],
+    "description": "Package declaration"
+  },
+
+  "Main function": {
+    "prefix": "main",
+    "body": ["package main", "", "func main() {", "  $1", "}"],
+    "description": "Main package with main function"
+  },
+
+  "Function": {
+    "prefix": "fn",
+    "body": ["func ${1:name}($2) ${3:error} {", "  $4", "}"],
+    "description": "Function"
+  },
+  "Function with receiver": {
+    "prefix": "fnr",
+    "body": ["func (${1:receiver} ${2:Type}) ${3:MethodName}($4) ${5:error} {", "  $6", "}"],
+    "description": "Method with receiver"
+  },
+
+  "Struct": {
+    "prefix": "st",
+    "body": ["type ${1:Name} struct {", "  $2", "}"],
+    "description": "Struct definition"
+  },
+  "Interface": {
+    "prefix": "int",
+    "body": ["type ${1:Name} interface {", "  $2", "}"],
+    "description": "Interface definition"
+  },
+
+  "If Error": {
+    "prefix": "ife",
+    "body": ["if err != nil {", "  return ${1:err}", "}"],
+    "description": "If error not nil"
+  },
+  "If Error with log": {
+    "prefix": "ifel",
+    "body": ["if err != nil {", "  log.Fatal(err)", "}"],
+    "description": "If error with log.Fatal"
+  },
+
+  "Error return": {
+    "prefix": "erret",
+    "body": ["if err != nil {", "  return ${1:nil}, fmt.Errorf(\"${2:error}: %w\", err)", "}"],
+    "description": "Return wrapped error"
+  },
+
+  "For Loop": {
+    "prefix": "for",
+    "body": ["for ${1:i} := 0; $1 < ${2:10}; $1++ {", "  $3", "}"],
+    "description": "For loop"
+  },
+  "For Range": {
+    "prefix": "forr",
+    "body": ["for ${1:index}, ${2:value} := range ${3:collection} {", "  $4", "}"],
+    "description": "For range loop"
+  },
+  "For Range Index Only": {
+    "prefix": "fori",
+    "body": ["for ${1:index} := range ${2:collection} {", "  $3", "}"],
+    "description": "For range (index only)"
+  },
+  "For Range Value Only": {
+    "prefix": "forv",
+    "body": ["for _, ${1:value} := range ${2:collection} {", "  $3", "}"],
+    "description": "For range (value only)"
+  },
+
+  "Switch": {
+    "prefix": "switch",
+    "body": ["switch ${1:variable} {", "case ${2:value}:", "  $3", "default:", "  $4", "}"],
+    "description": "Switch statement"
+  },
+  "Type Switch": {
+    "prefix": "tswitch",
+    "body": ["switch ${1:v} := ${2:i}.(type) {", "case ${3:type}:", "  $4", "default:", "  $5", "}"],
+    "description": "Type switch"
+  },
+
+  "Make Slice": {
+    "prefix": "make",
+    "body": ["${1:slice} := make([]${2:type}, ${3:len}, ${4:cap})"],
+    "description": "Make slice"
+  },
+  "Make Map": {
+    "prefix": "makem",
+    "body": ["${1:map} := make(map[${2:keyType}]${3:valueType})"],
+    "description": "Make map"
+  },
+  "Make Channel": {
+    "prefix": "makec",
+    "body": ["${1:ch} := make(chan ${2:type}, ${3:bufferSize})"],
+    "description": "Make channel"
+  },
+
+  "Goroutine": {
+    "prefix": "go",
+    "body": ["go func() {", "  $1", "}()"],
+    "description": "Anonymous goroutine"
+  },
+  "Goroutine with WaitGroup": {
+    "prefix": "gow",
+    "body": ["var wg sync.WaitGroup", "wg.Add(1)", "go func() {", "  defer wg.Done()", "  $1", "}()", "wg.Wait()"],
+    "description": "Goroutine with WaitGroup"
+  },
+
+  "Defer": {
+    "prefix": "df",
+    "body": ["defer $1"],
+    "description": "Defer statement"
+  },
+
+  "Test Function": {
+    "prefix": "test",
+    "body": ["func Test${1:Name}(t *testing.T) {", "  $2", "}"],
+    "description": "Test function"
+  },
+  "Table Driven Test": {
+    "prefix": "tdt",
+    "body": [
+      "func Test${1:Name}(t *testing.T) {",
+      "  tests := []struct{",
+      "    name string",
+      "    $2",
+      "  }{",
+      "    {",
+      "      name: \"${3:test case}\",",
+      "      $4",
+      "    },",
+      "  }",
+      "",
+      "  for _, tt := range tests {",
+      "    t.Run(tt.name, func(t *testing.T) {",
+      "      $5",
+      "    })",
+      "  }",
+      "}"
+    ],
+    "description": "Table-driven test"
+  },
+
+  "HTTP Handler": {
+    "prefix": "handler",
+    "body": ["func ${1:handler}(w http.ResponseWriter, r *http.Request) {", "  $2", "}"],
+    "description": "HTTP handler function"
+  },
+
+  "JSON Marshal": {
+    "prefix": "jm",
+    "body": ["${1:data}, err := json.Marshal($2)", "if err != nil {", "  return err", "}"],
+    "description": "JSON marshal"
+  },
+  "JSON Unmarshal": {
+    "prefix": "ju",
+    "body": ["var ${1:data} ${2:Type}", "err := json.Unmarshal(${3:bytes}, &$1)", "if err != nil {", "  return err", "}"],
+    "description": "JSON unmarshal"
+  },
+
+  "Print": {
+    "prefix": "p",
+    "body": ["fmt.Println($1)"],
+    "description": "fmt.Println"
+  },
+  "Printf": {
+    "prefix": "pf",
+    "body": ["fmt.Printf(\"${1:%v}\\n\", $2)"],
+    "description": "fmt.Printf"
+  },
+
+  "Context WithCancel": {
+    "prefix": "ctxc",
+    "body": ["ctx, cancel := context.WithCancel(${1:context.Background()})", "defer cancel()"],
+    "description": "Context with cancel"
+  },
+  "Context WithTimeout": {
+    "prefix": "ctxt",
+    "body": ["ctx, cancel := context.WithTimeout(${1:context.Background()}, ${2:time.Second})", "defer cancel()"],
+    "description": "Context with timeout"
+  }
+}

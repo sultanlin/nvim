@@ -1,0 +1,309 @@
+{
+  "MonoBehaviour Class": {
+    "prefix": "mb",
+    "body": [
+      "using UnityEngine;",
+      "",
+      "public class ${1:ClassName} : MonoBehaviour",
+      "{",
+      "  void Start()",
+      "  {",
+      "    $2",
+      "  }",
+      "",
+      "  void Update()",
+      "  {",
+      "    $3",
+      "  }",
+      "}"
+    ],
+    "description": "MonoBehaviour class with Start and Update"
+  },
+
+  "ScriptableObject": {
+    "prefix": "so",
+    "body": [
+      "using UnityEngine;",
+      "",
+      "[CreateAssetMenu(fileName = \"${1:New${2:ObjectName}}\", menuName = \"${3:Category}/$2\")]",
+      "public class $2 : ScriptableObject",
+      "{",
+      "  $4",
+      "}"
+    ],
+    "description": "ScriptableObject class"
+  },
+
+  "Serialized Field": {
+    "prefix": "sf",
+    "body": ["[SerializeField] ${1:type} ${2:fieldName};"],
+    "description": "Serialized field"
+  },
+  "SerializeField with Tooltip": {
+    "prefix": "sft",
+    "body": ["[SerializeField, Tooltip(\"${1:Description}\")]", "${2:type} ${3:fieldName};"],
+    "description": "Serialized field with tooltip"
+  },
+  "Header": {
+    "prefix": "header",
+    "body": ["[Header(\"${1:Section Name}\")]"],
+    "description": "Header attribute"
+  },
+  "Range": {
+    "prefix": "range",
+    "body": ["[Range(${1:0f}, ${2:1f})]"],
+    "description": "Range attribute"
+  },
+
+  "Property": {
+    "prefix": "prop",
+    "body": ["public ${1:type} ${2:PropertyName} { get; set; }"],
+    "description": "Auto-property"
+  },
+  "Property with backing field": {
+    "prefix": "propf",
+    "body": ["${1:type} ${2:_fieldName};", "public $1 ${2/^_(.)(.*)/${1:/upcase}$2/} ", "{", "  get => $2;", "  set => $2 = value;", "}"],
+    "description": "Property with private backing field"
+  },
+
+  "Start Method": {
+    "prefix": "start",
+    "body": ["void Start()", "{", "  $1", "}"],
+    "description": "Start method"
+  },
+  "Update Method": {
+    "prefix": "update",
+    "body": ["void Update()", "{", "  $1", "}"],
+    "description": "Update method"
+  },
+  "FixedUpdate Method": {
+    "prefix": "fixedupdate",
+    "body": ["void FixedUpdate()", "{", "  $1", "}"],
+    "description": "FixedUpdate method"
+  },
+  "LateUpdate Method": {
+    "prefix": "lateupdate",
+    "body": ["void LateUpdate()", "{", "  $1", "}"],
+    "description": "LateUpdate method"
+  },
+
+  "Awake Method": {
+    "prefix": "awake",
+    "body": ["void Awake()", "{", "  $1", "}"],
+    "description": "Awake method"
+  },
+  "OnEnable Method": {
+    "prefix": "onenable",
+    "body": ["void OnEnable()", "{", "  $1", "}"],
+    "description": "OnEnable method"
+  },
+  "OnDisable Method": {
+    "prefix": "ondisable",
+    "body": ["void OnDisable()", "{", "  $1", "}"],
+    "description": "OnDisable method"
+  },
+  "OnDestroy Method": {
+    "prefix": "ondestroy",
+    "body": ["void OnDestroy()", "{", "  $1", "}"],
+    "description": "OnDestroy method"
+  },
+
+  "OnCollisionEnter": {
+    "prefix": "oncollisionenter",
+    "body": ["void OnCollisionEnter(Collision ${1:collision})", "{", "  $2", "}"],
+    "description": "OnCollisionEnter method"
+  },
+  "OnCollisionExit": {
+    "prefix": "oncollisionexit",
+    "body": ["void OnCollisionExit(Collision ${1:collision})", "{", "  $2", "}"],
+    "description": "OnCollisionExit method"
+  },
+  "OnTriggerEnter": {
+    "prefix": "ontriggerenter",
+    "body": ["void OnTriggerEnter(Collider ${1:other})", "{", "  $2", "}"],
+    "description": "OnTriggerEnter method"
+  },
+  "OnTriggerExit": {
+    "prefix": "ontriggerexit",
+    "body": ["void OnTriggerExit(Collider ${1:other})", "{", "  $2", "}"],
+    "description": "OnTriggerExit method"
+  },
+
+  "Coroutine": {
+    "prefix": "cor",
+    "body": ["IEnumerator ${1:CoroutineName}()", "{", "  $2", "  yield return ${3:null};", "}"],
+    "description": "Coroutine method"
+  },
+  "WaitForSeconds": {
+    "prefix": "wfs",
+    "body": ["yield return new WaitForSeconds(${1:1f});"],
+    "description": "Wait for seconds"
+  },
+  "WaitForEndOfFrame": {
+    "prefix": "wfeof",
+    "body": ["yield return new WaitForEndOfFrame();"],
+    "description": "Wait for end of frame"
+  },
+  "Start Coroutine": {
+    "prefix": "startcor",
+    "body": ["StartCoroutine(${1:CoroutineName}());"],
+    "description": "Start coroutine"
+  },
+
+  "Get Component": {
+    "prefix": "gc",
+    "body": ["GetComponent<${1:Component}>()"],
+    "description": "GetComponent"
+  },
+  "Get Component in Children": {
+    "prefix": "gcic",
+    "body": ["GetComponentInChildren<${1:Component}>()"],
+    "description": "GetComponentInChildren"
+  },
+  "Get Component in Parent": {
+    "prefix": "gcip",
+    "body": ["GetComponentInParent<${1:Component}>()"],
+    "description": "GetComponentInParent"
+  },
+  "Try Get Component": {
+    "prefix": "tgc",
+    "body": ["if (TryGetComponent<${1:Component}>(out var ${2:component}))", "{", "  $3", "}"],
+    "description": "TryGetComponent"
+  },
+
+  "Find GameObject": {
+    "prefix": "find",
+    "body": ["GameObject.Find(\"${1:GameObjectName}\")"],
+    "description": "Find GameObject by name"
+  },
+  "Find with Tag": {
+    "prefix": "findt",
+    "body": ["GameObject.FindWithTag(\"${1:Tag}\")"],
+    "description": "Find GameObject with tag"
+  },
+
+  "Instantiate": {
+    "prefix": "inst",
+    "body": ["Instantiate(${1:prefab}, ${2:position}, ${3:Quaternion.identity});"],
+    "description": "Instantiate object"
+  },
+  "Destroy": {
+    "prefix": "destroy",
+    "body": ["Destroy(${1:gameObject});"],
+    "description": "Destroy object"
+  },
+  "Destroy Delayed": {
+    "prefix": "destroyd",
+    "body": ["Destroy(${1:gameObject}, ${2:1f});"],
+    "description": "Destroy object with delay"
+  },
+
+  "Debug Log": {
+    "prefix": "log",
+    "body": ["Debug.Log($1);"],
+    "description": "Debug.Log"
+  },
+  "Debug LogWarning": {
+    "prefix": "logw",
+    "body": ["Debug.LogWarning($1);"],
+    "description": "Debug.LogWarning"
+  },
+  "Debug LogError": {
+    "prefix": "loge",
+    "body": ["Debug.LogError($1);"],
+    "description": "Debug.LogError"
+  },
+
+  "Region": {
+    "prefix": "region",
+    "body": ["#region ${1:RegionName}", "$2", "#endregion"],
+    "description": "Region block"
+  },
+
+  "For Loop": {
+    "prefix": "for",
+    "body": ["for (int ${1:i} = 0; $1 < ${2:length}; $1++)", "{", "  $3", "}"],
+    "description": "For loop"
+  },
+  "Foreach": {
+    "prefix": "foreach",
+    "body": ["foreach (var ${1:item} in ${2:collection})", "{", "  $3", "}"],
+    "description": "Foreach loop"
+  },
+
+  "If Statement": {
+    "prefix": "if",
+    "body": ["if (${1:condition})", "{", "  $2", "}"],
+    "description": "If statement"
+  },
+  "If Else": {
+    "prefix": "ife",
+    "body": ["if (${1:condition})", "{", "  $2", "}", "else", "{", "  $3", "}"],
+    "description": "If-else statement"
+  },
+
+  "Switch": {
+    "prefix": "switch",
+    "body": ["switch (${1:variable})", "{", "  case ${2:value}:", "    $3", "    break;", "  default:", "    $4", "    break;", "}"],
+    "description": "Switch statement"
+  },
+
+  "Try Catch": {
+    "prefix": "try",
+    "body": ["try", "{", "  $1", "}", "catch (${2:Exception} ${3:ex})", "{", "  Debug.LogError($3);", "  $4", "}"],
+    "description": "Try-catch block"
+  },
+
+  "Singleton Pattern": {
+    "prefix": "singleton",
+    "body": [
+      "public static ${1:ClassName} Instance { get; private set; }",
+      "",
+      "void Awake()",
+      "{",
+      "  if (Instance != null && Instance != this)",
+      "  {",
+      "    Destroy(gameObject);",
+      "    return;",
+      "  }",
+      "",
+      "  Instance = this;",
+      "  ${2:DontDestroyOnLoad(gameObject);}",
+      "}"
+    ],
+    "description": "Singleton pattern"
+  },
+
+  "Invoke": {
+    "prefix": "invoke",
+    "body": ["Invoke(nameof(${1:MethodName}), ${2:1f});"],
+    "description": "Invoke method"
+  },
+  "InvokeRepeating": {
+    "prefix": "invoker",
+    "body": ["InvokeRepeating(nameof(${1:MethodName}), ${2:0f}, ${3:1f});"],
+    "description": "InvokeRepeating"
+  },
+  "CancelInvoke": {
+    "prefix": "cancelinvoke",
+    "body": ["CancelInvoke(nameof(${1:MethodName}));"],
+    "description": "CancelInvoke"
+  },
+
+  "Require Component": {
+    "prefix": "req",
+    "body": ["[RequireComponent(typeof(${1:Component}))]"],
+    "description": "RequireComponent attribute"
+  },
+
+  "Vector3": {
+    "prefix": "v3",
+    "body": ["new Vector3(${1:0f}, ${2:0f}, ${3:0f})"],
+    "description": "Vector3"
+  },
+  "Vector2": {
+    "prefix": "v2",
+    "body": ["new Vector2(${1:0f}, ${2:0f})"],
+    "description": "Vector2"
+  }
+}

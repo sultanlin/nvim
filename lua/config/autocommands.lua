@@ -103,14 +103,14 @@ autocmd({ "FocusGained", "TermClose", "TermLeave", "BufWinEnter" }, {
     desc = "Reload if file changed",
 })
 
-autocmd({ "TextYankPost" }, {
-    pattern = "*",
-    callback = function()
-        -- vim.highlight.on_yank({ higroup = "Visual", timeout = 40 })
-        vim.highlight.on_yank()
-    end,
-    desc = "Highlight on yank",
-})
+-- autocmd({ "TextYankPost" }, {
+--     pattern = "*",
+--     callback = function()
+--         -- vim.highlight.on_yank({ higroup = "Visual", timeout = 40 })
+--         vim.highlight.on_yank()
+--     end,
+--     desc = "Highlight on yank",
+-- })
 
 autocmd({ "CursorHold" }, {
     callback = function()

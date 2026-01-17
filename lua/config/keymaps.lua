@@ -126,8 +126,8 @@ keymap({ "x", "o" }, "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev S
 keymap({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save File" })
 -- vim.keymap.set({ "i", "x", "n", "s" }, "<C-s>", "<ESC>:update<CR>", opts)
 
---keywordprg
-keymap("n", "<leader>K", "<cmd>norm! K<cr>", { desc = "Keywordprg" })
+-- keywordprg (man search keyword)
+-- keymap("n", "<leader>K", "<cmd>norm! K<cr>", { desc = "Keywordprg" })
 
 -- tabs
 keymap("n", "<leader><tab>l", "<cmd>tablast<cr>", { desc = "Last Tab" })

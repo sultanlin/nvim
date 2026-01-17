@@ -6,13 +6,9 @@ return {
         event = "VeryLazy",
     },
     {
-        -- Compare with mini.diff
         "lewis6991/gitsigns.nvim", -- Shows changes to git in the left margin
-        -- event = { "BufReadPost", "BufWritePost", "BufNewFile" }
-        -- event = "BufEnter",
         event = "VeryLazy",
         cmd = "Gitsigns",
-
         opts = {
             --       add = { text = "▎" },
             --       change = { text = "▎" },
@@ -44,7 +40,7 @@ return {
                 col = 1,
             },
             numhl = true,
-            sign_priority = 15, -- higher than diagnostic,todo signs. lower than dapui breakpoint sign
+            -- sign_priority = 15, -- higher than diagnostic,todo signs. lower than dapui breakpoint sign
             --     signs_staged = {
             --       add = { text = "▎" },
             --       change = { text = "▎" },
@@ -214,22 +210,6 @@ return {
             }
         end,
     },
-    -- {
-    --     "kdheepak/lazygit.nvim",
-    --     dependencies = { "nvim-lua/plenary.nvim" },
-    --     event = "BufReadPre",
-    --
-    --     config = function()
-    --         local bufmap = function(keys, func, descr)
-    --             vim.keymap.set("n", keys, func, { buffer = bufnr, desc = descr, noremap = true, silent = true })
-    --         end
-    --
-    --         -- bufmap("gg", "<Cmd>lua Config.open_lazygit()<CR>", "Git tab")
-    --         bufmap("<leader>gg", "<Cmd>LazyGit<CR>", "Git tab")
-    --         -- require("lazygit").setup({
-    --         -- })
-    --     end,
-    -- },
     -- {
     --     "linrongbin16/gitlinker.nvim",
     --     dependencies = { { "nvim-lua/plenary.nvim" } },

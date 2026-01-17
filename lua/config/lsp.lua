@@ -1,11 +1,11 @@
 vim.filetype.add({ extension = { templ = "templ" } })
 vim.filetype.add({ extension = { jproperties = "jdtls" } })
 vim.lsp.enable({
-    "tailwindcss",
+    -- "tailwindcss", -- Enable when needed
     "eslint",
     "svelte",
-    "graphql",
-    "prismals",
+    -- "graphql", -- Enable when needed
+    -- "prismals", -- Enable when needed
     "emmet_ls",
     "taplo",
     -- "nil_ls",
@@ -27,6 +27,7 @@ vim.lsp.enable({
     "marksman",
     "kotlin_language_server",
     "jdtls",
+    -- "angularls", -- Enable when needed
 
     -- "css_variables",
     -- "cssmodules_ls",
@@ -36,13 +37,12 @@ vim.lsp.enable({
     -- "taplo",
 })
 
--- Testing
 vim.diagnostic.config({
     float = {
         focusable = true,
         style = "minimal",
         border = "rounded",
-        source = "always",
+        source = true,
         header = "",
         prefix = "",
     },
@@ -176,11 +176,15 @@ vim.api.nvim_create_autocmd("LspAttach", {
         end, opts)
 
         opts.desc = "Show documentation for what is under cursor"
-        keymap.set("n", "K", vim.lsp.buf.hover, opts)
+        keymap.set("n", "K", function()
+            vim.lsp.buf.hover({ border = "rounded" })
+        end, opts)
 
         -- "Signature Documentation"
         opts.desc = "Show documentation for what is under cursor"
-        keymap.set({ "n", "i" }, "gK", vim.lsp.buf.signature_help, opts)
+        keymap.set({ "n", "i" }, "gK", function()
+            vim.lsp.buf.signature_help({ border = "rounded" })
+        end, opts)
 
         opts.desc = "Show LSP Symbols"
         keymap.set("n", "<leader>ls", function()
@@ -206,10 +210,10 @@ vim.api.nvim_create_autocmd("LspAttach", {
         -- keymap.set("n", "<leader>li", "<cmd>LspInfo<cr>", opts)
 
         opts.desc = "Inspect TS Node"
-        keymap.set("n", "<leader>ci", "<cmd>Inspect<cr>")
+        keymap.set("n", "<leader>li", "<cmd>Inspect<cr>")
 
         opts.desc = "Inspect TS Tree"
-        keymap.set("n", "<leader>cI", "<cmd>InspectTree<cr>")
+        keymap.set("n", "<leader>lI", "<cmd>InspectTree<cr>")
 
         opts.desc = "Refresh code lenses"
         keymap.set("n", "<leader>ly", vim.lsp.codelens.refresh, opts)

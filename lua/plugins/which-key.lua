@@ -26,6 +26,7 @@ return {
             { "<leader>q", "<cmd>confirm q<CR>", desc = "Quit" },
             { "<leader>s", group = "Search" },
             { "<leader>t", group = "Test" },
+            { "<leader>u", group = "Extras" },
             -- { "<leader>h", "<cmd>split<CR>", desc = "Horizontal Split" },
             -- { "<leader>v", "<cmd>vsplit<CR>", desc = "Split" },
             { "<leader>x", "<cmd>x<CR>", desc = "Write and Quit" },

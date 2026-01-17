@@ -1,56 +1,29 @@
--- local root_files = { ".git", "mvnw", "gradlew", "pom.xml", "build.gradle" }
-
 local features = {
     codelens = true,
     debugger = true,
 }
 
-local LSP_JAVA_PATH
-if os.getenv("LSP_JAVA") ~= nil then
-    LSP_JAVA_PATH = "LSP_JAVA"
-end
+local LSP_JAVA_PATH = assert(os.getenv("LSP_JAVA"))
 
 local function get_jdtls_paths()
     local path = {}
 
     path.data_dir = os.getenv("HOME") .. "/.cache/jdtls/workspace"
 
-    local jdtls_install
-    if os.getenv(LSP_JAVA_PATH) ~= nil then
-        jdtls_install = os.getenv(LSP_JAVA_PATH) .. "/share/java/jdtls"
-    elseif not os.getenv(LSP_JAVA_PATH) then
-        jdtls_install = require("mason-registry").get_package("jdtls"):get_install_path()
-    end
+    local jdtls_install = LSP_JAVA_PATH .. "/share/java/jdtls"
 
-    local lombok_install
-    if os.getenv(LSP_JAVA_PATH) ~= nil then
-        lombok_install = os.getenv("LSP_LOMBOK") .. "/share/java"
-    elseif not os.getenv(LSP_JAVA_PATH) then
-        lombok_install = require("mason-registry").get_package("jdtls"):get_install_path()
-    end
+    local lombok_path = assert(os.getenv("LSP_LOMBOK"))
 
-    path.java_agent = lombok_install .. "/lombok.jar"
+    path.java_agent = lombok_path .. "/share/java/lombok.jar"
     path.launcher_jar = vim.fn.glob(jdtls_install .. "/plugins/org.eclipse.equinox.launcher_*.jar")
-
-    if vim.fn.has("mac") == 1 then
-        path.platform_config = jdtls_install .. "/config_mac"
-    elseif vim.fn.has("unix") == 1 then
-        path.platform_config = jdtls_install .. "/config_linux"
-    elseif vim.fn.has("win32") == 1 then
-        path.platform_config = jdtls_install .. "/config_win"
-    end
 
     path.bundles = {}
 
     ---
     -- Include java-test bundle if present
     ---
-    local java_test_path
-    if os.getenv("LSP_JAVA_TEST") ~= nil then
-        java_test_path = os.getenv("LSP_JAVA_TEST") .. "/share/vscode/extensions/vscjava.vscode-java-test/server"
-    elseif not os.getenv(LSP_JAVA_PATH) then
-        java_test_path = require("mason-registry").get_package("jdtls"):get_install_path() .. "/extension/server"
-    end
+    local java_test_path = assert(os.getenv("LSP_JAVA_TEST"))
+    java_test_path = java_test_path .. "/share/vscode/extensions/vscjava.vscode-java-test/server"
 
     local java_test_bundle = vim.split(vim.fn.glob(java_test_path .. "/*.jar"), "\n")
 
@@ -63,12 +36,8 @@ local function get_jdtls_paths()
     ---
     -- Include java-debug-adapter bundle if present
     ---
-    local java_debug_path
-    if os.getenv("LSP_JAVA_DEBUG") ~= nil then
-        java_debug_path = os.getenv("LSP_JAVA_DEBUG") .. "/share/vscode/extensions/vscjava.vscode-java-debug/server"
-    elseif not os.getenv("LSP_JAVA_DEBUG") then
-        java_debug_path = require("mason-registry").get_package("java-debug-adapter"):get_install_path()
-    end
+    local java_debug_path = assert(os.getenv("LSP_JAVA_DEBUG"))
+    java_debug_path = java_debug_path .. "/share/vscode/extensions/vscjava.vscode-java-debug/server"
 
     local java_debug_bundle = vim.split(vim.fn.glob(java_debug_path .. "/com.microsoft.java.debug.plugin-*.jar"), "\n")
 
@@ -81,8 +50,11 @@ local function get_jdtls_paths()
     ---
     -- Include spring-boot-tools bundle if present
     ---
-    require("spring_boot").init_lsp_commands()
-    vim.list_extend(path.bundles, require("spring_boot").java_extensions())
+    local springboot = package.loaded["spring_boot"]
+    if springboot then
+        springboot.init_lsp_commands()
+        vim.list_extend(path.bundles, springboot.java_extensions())
+    end
 
     path.runtimes = {}
 
@@ -94,7 +66,7 @@ local function enable_codelens(bufnr)
 
     vim.api.nvim_create_autocmd("BufWritePost", {
         buffer = bufnr,
-        group = java_cmds,
+        -- group = java_cmds,
         desc = "refresh codelens",
         callback = function()
             pcall(vim.lsp.codelens.refresh)
@@ -114,30 +86,39 @@ local function enable_debugger(bufnr)
 end
 
 local function jdtls_on_attach(client, bufnr)
-    if features.debugger then
-        enable_debugger(bufnr)
-    end
+    vim.api.nvim_create_autocmd("LspAttach", {
+        group = vim.api.nvim_create_augroup("UserLspConfig", {}),
+        callback = function(args)
+            -- Buffer local mappings.
+            -- See `:help vim.lsp.*` for documentation on any of the below functions
+            local opts = { buffer = args.buf, silent = true }
 
-    if features.codelens then
-        enable_codelens(bufnr)
-    end
+            -- set keybinds
+            -- The following mappings are based on the suggested usage of nvim-jdtls
+            -- https://github.com/mfussenegger/nvim-jdtls#usage
+            local keymap = vim.keymap
+            opts.desc = "Organize imports"
+            keymap.set("n", "<leader>jo", "<cmd>lua require('jdtls').organize_imports()<cr>", opts)
+            opts.desc = "Extract variable"
+            keymap.set({ "n", "v", "x" }, "<leader>jv", "<cmd>lua require('jdtls').extract_variable()<cr>", opts)
+            opts.desc = "Extract constant"
+            keymap.set({ "n", "v", "x" }, "<leader>jc", "<cmd>lua require('jdtls').extract_constant()<cr>", opts)
+            opts.desc = "Extract method"
+            keymap.set({ "v", "x" }, "<leader>jm", "<esc><Cmd>lua require('jdtls').extract_method(true)<cr>", opts)
+            opts.desc = "Update config"
+            keymap.set("n", "<leader>ju", "<Cmd>JdtUpdateConfig<CR>", opts)
+            opts.desc = "Restart LSP"
+            keymap.set("n", "<leader>jr", "<Cmd>JdtRestart<CR>", opts)
 
-    -- The following mappings are based on the suggested usage of nvim-jdtls
-    -- https://github.com/mfussenegger/nvim-jdtls#usage
+            if features.debugger then
+                enable_debugger(bufnr)
+            end
 
-    local opts = { buffer = bufnr, silent = true }
-    opts.desc = "Organize imports"
-    vim.keymap.set("n", "<leader>jo", "<cmd>lua require('jdtls').organize_imports()<cr>", opts)
-    opts.desc = "Extract variable"
-    vim.keymap.set({ "n", "v", "x" }, "<leader>jv", "<cmd>lua require('jdtls').extract_variable()<cr>", opts)
-    opts.desc = "Extract constant"
-    vim.keymap.set({ "n", "v", "x" }, "<leader>jc", "<cmd>lua require('jdtls').extract_constant()<cr>", opts)
-    opts.desc = "Extract method"
-    vim.keymap.set({ "v", "x" }, "<leader>jm", "<esc><Cmd>lua require('jdtls').extract_method(true)<cr>", opts)
-    opts.desc = "Update config"
-    vim.keymap.set("n", "<leader>ju", "<Cmd>JdtUpdateConfig<CR>", opts)
-    opts.desc = "Restart LSP"
-    vim.keymap.set("n", "<leader>jr", "<Cmd>JdtRestart<CR>", opts)
+            if features.codelens then
+                enable_codelens(bufnr)
+            end
+        end,
+    })
 
     -- -- Cool feature, maybe later
     -- vim.api.nvim_buf_create_user_command(bufnr, "SpringBoot", function(opt)
@@ -191,8 +172,7 @@ local data_dir = path.data_dir .. "/" .. vim.fn.fnamemodify(vim.fn.getcwd(), ":p
 -- https://pastes.io/gqpzsaseyg
 local cmd = {
     -- 💀
-    "java",
-    -- os.getenv(LSP_JAVA_PATH) .. "/bin/jdtls",
+    "java", -- LSP_JAVA_PATH .. "/bin/jdtls",
 
     "-Declipse.application=org.eclipse.jdt.ls.core.id1",
     "-Dosgi.bundles.defaultStartLevel=4",
@@ -202,9 +182,8 @@ local cmd = {
     "-Dosgi.configuration.cascaded=true",
     -- "-Dosgi.sharedConfiguration.area=/home/sultan/.config/nvim/java/config_linux",
     "-Dosgi.sharedConfiguration.area="
-        .. os.getenv(LSP_JAVA_PATH)
+        .. LSP_JAVA_PATH
         .. "/share/java/jdtls/config_linux/",
-    -- os.getenv(LSP_JAVA_PATH) .. "/share/java/jdtls/config_linux/",
 
     "-Declipse.product=org.eclipse.jdt.ls.core.product",
     "-Dlog.protocol=true",
@@ -266,7 +245,7 @@ local lsp_settings = {
                 "io.vavr.Predicates.not",
             },
         },
-        extendedClientCapabilities = require("jdtls.capabilities"),
+        -- extendedClientCapabilities = require("jdtls.capabilities"),
         contentProvider = { preferred = "fernflower" },
         sources = {
             organizeImports = {
@@ -280,10 +259,21 @@ local lsp_settings = {
             },
             useBlocks = true,
         },
+        -- java = {
+        --     -- jdt = {
+        --     --   ls = {
+        --     --     vmargs = "-XX:+UseParallelGC -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90 -Dsun.zip.disableMemoryMapping=true -Xmx1G -Xms100m"
+        --     --   }
+        --     -- },
+        --     format = {
+        --         enabled = true,
+        --         -- settings = {
+        --         --   profile = 'asdf'
+        --         -- },
+        --     },
+        -- },
     },
 }
-
-local jdtls = require("jdtls")
 
 vim.cmd(
     "command! -buffer -nargs=? -complete=custom,v:lua.require'jdtls'._complete_compile JdtCompile lua require('jdtls').compile(<f-args>)"
@@ -294,18 +284,11 @@ vim.cmd(
 vim.cmd("command! -buffer JdtUpdateConfig lua require('jdtls').update_project_config()")
 vim.cmd("command! -buffer JdtBytecode lua require('jdtls').javap()")
 
--- require("spring_boot.launch").start({ autocmd = false })
--- Add additional capabilities supported by blink-cmp
 return {
     cmd = cmd,
     settings = lsp_settings,
     on_attach = jdtls_on_attach,
-    -- capabilities = jdtls.capabilities,
-
-    capabilities = require("blink.cmp").get_lsp_capabilities(),
-    -- root_dir = jdtls.setup.find_root(root_files), -- old
     root_dir = vim.fs.root(0, { "gradlew", ".git", "mvnw" }),
-
     flags = { allow_incremental_sync = true },
     on_init = function(client, _)
         if client.config.settings then
@@ -316,95 +299,17 @@ return {
         bundles = path.bundles,
     },
     handlers = {
-        ["language/status"] = function(_, result)
-            -- Print or whatever.
-        end,
-        ["$/progress"] = function(_, result, ctx)
-            -- disable progress updates.
-        end,
-        -- Stops loading/loaded message when opening java files
-        -- ["language/status"] = function() end,
-        -- FIXME: Maybe check this again? https://github.com/neovim/nvim-lspconfig/blob/master/lua/lspconfig/server_configurations/jdtls.lua#L117
+        ["language/status"] = function(_, result) end, -- Stops loading/loaded message when opening java files
+        ["$/progress"] = function(_, result, ctx) end, -- disable progress updates.
     },
     filetypes = { "java", "jproperties" },
 }
--- return {
---     vim.lsp.config("jdtls", config),
--- }
--- return {
---     --     settings = {
---     --         java = {
---     --             -- jdt = {
---     --             --   ls = {
---     --             --     vmargs = "-XX:+UseParallelGC -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90 -Dsun.zip.disableMemoryMapping=true -Xmx1G -Xms100m"
---     --             --   }
---     --             -- },
---     --             eclipse = {
---     --                 downloadSources = true,
---     --             },
---     --             configuration = {
---     --                 updateBuildConfiguration = "interactive",
---     --                 runtimes = path.runtimes,
---     --             },
---     --             maven = {
---     --                 downloadSources = true,
---     --             },
---     --             implementationsCodeLens = {
---     --                 enabled = true,
---     --             },
---     --             referencesCodeLens = {
---     --                 enabled = true,
---     --             },
---     --             -- inlayHints = {
---     --             --   parameterNames = {
---     --             --     enabled = 'all' -- literals, all, none
---     --             --   }
---     --             -- },
---     --             format = {
---     --                 enabled = true,
---     --                 -- settings = {
---     --                 --   profile = 'asdf'
---     --                 -- },
---     --             },
---     --         },
---     --         signatureHelp = {
---     --             enabled = true,
---     --         },
---     --         completion = {
---     --             favoriteStaticMembers = {
---     --                 "org.hamcrest.MatcherAssert.assertThat",
---     --                 "org.hamcrest.Matchers.*",
---     --                 "org.hamcrest.CoreMatchers.*",
---     --                 "org.junit.jupiter.api.Assertions.*",
---     --                 "java.util.Objects.requireNonNull",
---     --                 "java.util.Objects.requireNonNullElse",
---     --                 "org.mockito.Mockito.*",
---     --             },
---     --         },
---     --         contentProvider = {
---     --             preferred = "fernflower",
---     --         },
---     --         -- extendedClientCapabilities = jdtls.extendedClientCapabilities,
---     --         sources = {
---     --             organizeImports = {
---     --                 starThreshold = 9999,
---     --                 staticStarThreshold = 9999,
---     --             },
---     --         },
---     --         codeGeneration = {
---     --             toString = {
---     --                 template = "${object.className}{${member.name()}=${member.value}, ${otherMembers}}",
---     --             },
---     --             useBlocks = true,
---     --         },
---     --     },
---     --     -- setup = {
---     --     --     commands = {
---     --     --         Format = {
---     --     --             function()
---     --     --                 vim.lsp.buf.range_formatting({}, { 0, 0 }, { vim.fn.line("$"), 0 })
---     --     --             end,
---     --     --         },
---     --     --     },
---     --     -- },
--- }
+-- setup = {
+--     commands = {
+--         Format = {
+--             function()
+--                 vim.lsp.buf.range_formatting({}, { 0, 0 }, { vim.fn.line("$"), 0 })
+--             end,
+--         },
+--     },
+-- },

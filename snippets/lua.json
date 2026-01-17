@@ -88,5 +88,33 @@
     "prefix": "T",
     "body": "T['$1']['$2'] = function()\n\t${0:MiniTest.skip()}\nend",
     "description": "(minitest) new test case"
+  },
+  {
+  "Print Statement": {
+    "prefix": "pr",
+    "body": [
+      "print('$1')"
+    ],
+    "description": "Quick print statement"
+  },
+
+  "Print with inspect": {
+    "prefix": "pri",
+    "body": [
+      "print(vim.inspect($1))"
+    ],
+    "description": "Print with vim.inspect for tables"
+  },
+  "Function with docstring": {
+    "prefix": "func",
+    "body": [
+      "--- $1",
+      "--- @param $2",
+      "--- @return $3",
+      "local function ${4:function_name}($2)",
+      "  $5",
+      "end"
+    ],
+    "description": "Function with LuaLS documentation"
   }
 }

@@ -17,13 +17,13 @@ return {
     },
     config = function()
         local web_formatters = {
-            "prettierd",
-            "rustywind",
+            -- "prettierd",
             "prettier",
+            "rustywind",
         }
         local paths = {
             stylua_config = vim.fn.expand("$HOME/.config/nvim/.stylua.toml"),
-            prettierd_config = vim.fn.expand("$HOME/.config/nvim/.prettierrc"),
+            -- prettierd_config = vim.fn.expand("$HOME/.config/nvim/.prettierrc"),
         }
         require("conform").setup({
             log_level = vim.log.levels.DEBUG,
@@ -59,11 +59,11 @@ return {
                 shfmt = {
                     prepend_args = { "-i", "2", "-ci", "-bn" },
                 },
-                prettierd = {
-                    env = {
-                        PRETTIERD_DEFAULT_CONFIG = paths.prettierd_config,
-                    },
-                },
+                -- prettierd = {
+                --     env = {
+                --         PRETTIERD_DEFAULT_CONFIG = paths.prettierd_config,
+                --     },
+                -- },
                 prettier = {
                     prepend_args = {
                         "--no-semi",
@@ -103,12 +103,18 @@ return {
                 svelte = web_formatters,
                 css = web_formatters,
                 astro = web_formatters,
-                html = { "prettierd", "prettier", stop_after_first = true },
-                json = { "prettierd", "prettier", stop_after_first = true },
-                jsonc = { "prettierd", "prettier", stop_after_first = true },
-                -- json = { { "fixjson", "prettierd", "prettier" } },
-                yaml = { "prettierd", "prettier", stop_after_first = true },
-                graphql = { "prettierd", "prettier", stop_after_first = true },
+                html = web_formatters,
+                htmlangular = web_formatters,
+                json = web_formatters,
+                jsonc = web_formatters,
+                yaml = web_formatters,
+                graphql = web_formatters,
+                -- html = { "prettier", stop_after_first = true },
+                -- json = { "prettier", stop_after_first = true },
+                -- jsonc = { "prettier", stop_after_first = true },
+                -- -- json = { { "fixjson",  "prettier" } },
+                -- yaml = { "prettier", stop_after_first = true },
+                -- graphql = { "prettier", stop_after_first = true },
 
                 -- cs = { "csharpier" },
                 -- xml = { "xmlformat" },
@@ -131,6 +137,41 @@ return {
                 ["markdown"] = { "prettier", "markdownlint-cli2", "markdown-toc" },
                 ["markdown.mdx"] = { "prettier", "markdownlint-cli2", "markdown-toc" },
             },
+            -- Snacks.toggle({
+            --     name = "auto formatting buf",
+            --     get = function()
+            --         return not vim.b.disable_autoformat ~= false
+            --     end,
+            --     set = function(state)
+            --         if state then
+            --             vim.cmd("FormatEnable!")
+            --         else
+            --             vim.cmd("FormatDisable!")
+            --         end
+            --     end,
+            -- }):map("<leader>uf"),
+            -- From: https://github.com/stevearc/conform.nvim/blob/master/doc/recipes.md#command-to-toggle-format-on-save
+            vim.api.nvim_create_user_command("FormatDisable", function(args)
+                if args.bang then
+                    -- FormatDisable! will disable formatting just for this buffer
+                    vim.b.disable_autoformat = true
+                else
+                    vim.g.disable_autoformat = true
+                end
+            end, {
+                desc = "Disable autoformat-on-save",
+                bang = true,
+            }),
+            vim.api.nvim_create_user_command("FormatEnable", function(args)
+                if args.bang then
+                    vim.b.disable_autoformat = false
+                else
+                    vim.g.disable_autoformat = false
+                end
+            end, {
+                desc = "Re-enable autoformat-on-save",
+                bang = true,
+            }),
         })
     end,
 }

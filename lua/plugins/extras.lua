@@ -18,7 +18,7 @@ return {
         "mbbill/undotree",
         event = "VeryLazy",
         config = function()
-            vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle, { desc = "Undotree" })
+            vim.keymap.set("n", "<leader>U", vim.cmd.UndotreeToggle, { desc = "Undotree" })
         end,
     },
     {
@@ -26,7 +26,7 @@ return {
         event = { "BufReadPost", "BufNewFile" },
         opts = {},
     },
-
+    "neovim/nvim-lspconfig",
     -- {
     --     "MaxMEllon/vim-jsx-pretty",
     --     event = "VeryLazy",
