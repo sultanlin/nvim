@@ -1,7 +1,11 @@
 return {
     "nvim-lualine/lualine.nvim",
-    lazy = false,
-    dependencies = { { "nvim-tree/nvim-web-devicons", lazy = true }, "bwpge/lualine-pretty-path" },
+    -- lazy = false,
+    event = "VeryLazy",
+    dependencies = {
+        { "nvim-tree/nvim-web-devicons", lazy = true },
+        "bwpge/lualine-pretty-path",
+    },
     config = function()
         local lualine = require("lualine")
         local lazy_status = require("lazy.status") -- to configure lazy pending updates count
@@ -37,14 +41,10 @@ return {
                         -- sources = { "nvim_workspace_diagnostic", "nvim_lsp" }, -- diagnostics for entire workspace
                         sources = { "nvim_diagnostic", "nvim_lsp" }, -- diagnostics for active buffer
                         symbols = {
-                            -- error = "" .. " ",
-                            -- warn = "" .. " ",
-                            -- info = "" .. " ",
-                            -- hint = "󰌶" .. " ",
-                            error = "" .. " ",
-                            warn = "" .. " ",
-                            hint = "" .. " ",
-                            info = "" .. " ",
+                            error = icons.diagnostics.ERROR .. " ",
+                            warn = icons.diagnostics.WARN .. " ",
+                            hint = icons.diagnostics.HINT .. " ",
+                            info = icons.diagnostics.INFO .. " ",
                         },
                     },
                 },

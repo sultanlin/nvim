@@ -13,25 +13,33 @@ return {
         "echasnovski/mini.surround",
         -- event = "VeryLazy",
         -- lazy = true,
+        --stylua: ignore
         keys = {
-            { "s", "", desc = "Surround" },
-            { "sa", "sa", desc = "Add Surround" },
-            { "sd", "sd", desc = "Delete Surround" },
-            { "sf", "sf", desc = "Find Surround" },
-            { "sF", "sF", desc = "Find Surround (left)" },
-            { "sh", "sh", desc = "Highlight Surround" },
-            { "sr", "sr", desc = "Replace Surround" },
-            { "sn", "sn", desc = "Update 'n_lines' Surround" },
+            { "gs", function() vim.notify("surround starting") end, desc = "Surround", },
+            { "gsa", "sa", desc = "Add Surround", mode = { "n", "x" } },
+            { "gsd", "sd", desc = "Delete Surround" },
+            { "gsf", "sf", desc = "Find Surround" },
+            { "gsF", "sF", desc = "Find Surround (left)" },
+            { "gsh", "sh", desc = "Highlight Surround" },
+            { "gsr", "sr", desc = "Replace Surround" },
+            { "gsn", "sn", desc = "Update 'n_lines' Surround" },
         },
         opts = {
             mappings = {
-                add = "sa", -- Add surrounding in Normal and Visual modes
-                delete = "sd", -- Delete surrounding
-                find = "sf", -- Find surrounding (to the right)
-                find_left = "sF", -- Find surrounding (to the left)
-                highlight = "sh", -- Highlight surrounding
-                replace = "sr", -- Replace surrounding
-                update_n_lines = "sn", -- Update `n_lines`
+                add = "gsa", -- Add surrounding in Normal and Visual modes
+                delete = "gsd", -- Delete surrounding
+                find = "gsf", -- Find surrounding (to the right)
+                find_left = "gsF", -- Find surrounding (to the left)
+                highlight = "gsh", -- Highlight surrounding
+                replace = "gsr", -- Replace surrounding
+                update_n_lines = "gsn", -- Update `n_lines`
+                -- add = "sa", -- Add surrounding in Normal and Visual modes
+                -- delete = "sd", -- Delete surrounding
+                -- find = "sf", -- Find surrounding (to the right)
+                -- find_left = "sF", -- Find surrounding (to the left)
+                -- highlight = "sh", -- Highlight surrounding
+                -- replace = "sr", -- Replace surrounding
+                -- update_n_lines = "sn", -- Update `n_lines`
             },
         },
     },
@@ -64,8 +72,9 @@ return {
                     }, {}),
                     f = require("mini.ai").gen_spec.treesitter({ a = "@function.outer", i = "@function.inner" }, {}),
                     c = require("mini.ai").gen_spec.treesitter({ a = "@class.outer", i = "@class.inner" }, {}),
+                    F = require("mini.ai").gen_spec.function_call(),
                     i = require("mini.extra").gen_ai_spec.indent(),
-                    g = require("mini.extra").gen_ai_spec.buffer(), -- t = { "<([%p%w]-)%f[^<%w][^<>]->.-</%1>", "^<.->().*()</[^/]->$" },
+                    B = require("mini.extra").gen_ai_spec.buffer(), -- t = { "<([%p%w]-)%f[^<%w][^<>]->.-</%1>", "^<.->().*()</[^/]->$" },
                     --         -- t = { "<([%p%w]-)%f[^<%w][^<>]->.-</%1>", "^<.->().*()</[^/]->$" },
                 },
             }

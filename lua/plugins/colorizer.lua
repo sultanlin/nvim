@@ -1,20 +1,25 @@
+local filetypes = {
+    "typescript",
+    "typescriptreact",
+    "javascript",
+    "javascriptreact",
+    "css",
+    "html",
+    "astro",
+    "lua",
+    "templ",
+    "cmp_docs",
+}
 return {
     "catgoose/nvim-colorizer.lua",
-    event = "BufReadPre",
+    ft = filetypes,
+    -- event = "BufReadPre",
+    -- event = "VeryLazy",
     opts = {
-
-        filetypes = {
-            "typescript",
-            "typescriptreact",
-            "javascript",
-            "javascriptreact",
-            "css",
-            "html",
-            "astro",
-            "lua",
-            "templ",
-        },
+        -- lazy_load = true,
+        filetypes = filetypes,
         user_default_options = {
+            -- mode = "virtualtext",
             -- names_custom = true, -- Custom names to be highlighted: table|function|false
             css = true, -- Enable all CSS *features*:
             -- Tailwind colors.  boolean|'normal'|'lsp'|'both'.  True sets to 'normal'

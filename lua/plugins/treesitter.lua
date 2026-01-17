@@ -7,7 +7,7 @@ return {
         build = ":TSUpdate",
         lazy = false,
         -- event = { "BufReadPre", "BufWritePre", "BufNewFile", "VeryLazy" },
-        init = function()
+        config = function()
             local ensure_installed = {
                 -- NOTE: Bundled parsers (natively installed)
                 "c",
