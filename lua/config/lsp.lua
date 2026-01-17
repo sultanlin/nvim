@@ -35,6 +35,8 @@ vim.lsp.enable({
     -- "lemminx",
     -- "nginx_language_server",
     -- "taplo",
+    "vue_ls",
+    "vtsls",
 })
 
 vim.diagnostic.config({
