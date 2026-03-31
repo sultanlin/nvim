@@ -17,7 +17,7 @@ vim.lsp.enable({
     "templ",
     "ruff",
     -- "ts_ls",
-    "tsgo",
+    -- "tsgo", -- TODO: Enable when plugins work: https://github.com/microsoft/typescript-go/issues/648
     "html",
     "lua_ls",
     "omnisharp",

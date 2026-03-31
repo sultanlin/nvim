@@ -31,7 +31,7 @@ require("lazy").setup({
         notify = false,
     },
     checker = {
-        enabled = true,
+        enabled = false, -- FIX: Freeze on startup
         notify = false, -- notify on update
     },
 

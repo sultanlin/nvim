@@ -108,6 +108,7 @@ return {
                 json = web_formatters,
                 jsonc = web_formatters,
                 yaml = web_formatters,
+                vue = web_formatters,
                 graphql = web_formatters,
                 -- html = { "prettier", stop_after_first = true },
                 -- json = { "prettier", stop_after_first = true },

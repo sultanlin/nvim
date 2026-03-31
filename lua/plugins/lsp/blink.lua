@@ -9,7 +9,7 @@ return {
         },
         -- build instructions for nix: https://cmp.saghen.dev/configuration/fuzzy.html
         -- build = "cargo build --release",
-        build = "nix run .#build-plugin",
+        build = "nix run .#build-plugin --accept-flake-config",
         event = { "InsertEnter", "CmdlineEnter" },
         opts = {
             cmdline = {

@@ -51,7 +51,7 @@ return {
                 "yaml",
                 "diff",
                 "jsdoc",
-                "jsonc",
+                -- "jsonc", -- unsupported
                 "luap",
                 "printf",
                 "regex",
@@ -65,7 +65,7 @@ return {
                 "git_config",
                 "latex",
                 "make",
-                "norg",
+                -- "norg", -- unsupported
                 "scss",
                 "typst",
             }

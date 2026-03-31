@@ -58,7 +58,7 @@ return {
                     { "fileformat", separator = "", padding = { left = 1, right = 2 } }, -- Penguin
                 },
                 lualine_z = {
-                    { "progress", separator = "", padding = { left = 0, right = 0 } },
+                    { "progress", separator = "|", padding = { left = 0, right = 0 } },
                     { "location", padding = { left = 0, right = 1 } },
                 },
             },
