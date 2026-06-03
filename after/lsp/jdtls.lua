@@ -62,16 +62,20 @@ local function get_jdtls_paths()
 end
 
 local function enable_codelens(bufnr)
-    pcall(vim.lsp.codelens.refresh)
-
-    vim.api.nvim_create_autocmd("BufWritePost", {
-        buffer = bufnr,
-        -- group = java_cmds,
-        desc = "refresh codelens",
-        callback = function()
-            pcall(vim.lsp.codelens.refresh)
-        end,
-    })
+    vim.lsp.codelens.enable(true, { bufnr })
+    vim.defer_fn(function()
+        vim.lsp.codelens.refresh({ bufnr = bufnr })
+    end, 500) -- wait 500ms for jdtls to finish initializing
+    -- pcall(vim.lsp.codelens.refresh)
+    --
+    -- vim.api.nvim_create_autocmd("BufWritePost", {
+    --     buffer = bufnr,
+    --     -- group = java_cmds,
+    --     desc = "refresh codelens",
+    --     callback = function()
+    --         pcall(vim.lsp.codelens.refresh)
+    --     end,
+    -- })
 end
 
 local function enable_debugger(bufnr)
@@ -86,39 +90,34 @@ local function enable_debugger(bufnr)
 end
 
 local function jdtls_on_attach(client, bufnr)
-    vim.api.nvim_create_autocmd("LspAttach", {
-        group = vim.api.nvim_create_augroup("UserLspConfig", {}),
-        callback = function(args)
-            -- Buffer local mappings.
-            -- See `:help vim.lsp.*` for documentation on any of the below functions
-            local opts = { buffer = args.buf, silent = true }
+    -- Buffer local mappings.
+    -- See `:help vim.lsp.*` for documentation on any of the below functions
+    local opts = { buffer = bufnr, silent = true }
 
-            -- set keybinds
-            -- The following mappings are based on the suggested usage of nvim-jdtls
-            -- https://github.com/mfussenegger/nvim-jdtls#usage
-            local keymap = vim.keymap
-            opts.desc = "Organize imports"
-            keymap.set("n", "<leader>jo", "<cmd>lua require('jdtls').organize_imports()<cr>", opts)
-            opts.desc = "Extract variable"
-            keymap.set({ "n", "v", "x" }, "<leader>jv", "<cmd>lua require('jdtls').extract_variable()<cr>", opts)
-            opts.desc = "Extract constant"
-            keymap.set({ "n", "v", "x" }, "<leader>jc", "<cmd>lua require('jdtls').extract_constant()<cr>", opts)
-            opts.desc = "Extract method"
-            keymap.set({ "v", "x" }, "<leader>jm", "<esc><Cmd>lua require('jdtls').extract_method(true)<cr>", opts)
-            opts.desc = "Update config"
-            keymap.set("n", "<leader>ju", "<Cmd>JdtUpdateConfig<CR>", opts)
-            opts.desc = "Restart LSP"
-            keymap.set("n", "<leader>jr", "<Cmd>JdtRestart<CR>", opts)
+    -- set keybinds
+    -- The following mappings are based on the suggested usage of nvim-jdtls
+    -- https://github.com/mfussenegger/nvim-jdtls#usage
+    local keymap = vim.keymap
+    opts.desc = "Organize imports"
+    keymap.set("n", "<leader>jo", "<cmd>lua require('jdtls').organize_imports()<cr>", opts)
+    opts.desc = "Extract variable"
+    keymap.set({ "n", "v", "x" }, "<leader>jv", "<cmd>lua require('jdtls').extract_variable()<cr>", opts)
+    opts.desc = "Extract constant"
+    keymap.set({ "n", "v", "x" }, "<leader>jc", "<cmd>lua require('jdtls').extract_constant()<cr>", opts)
+    opts.desc = "Extract method"
+    keymap.set({ "v", "x" }, "<leader>jm", "<esc><Cmd>lua require('jdtls').extract_method(true)<cr>", opts)
+    opts.desc = "Update config"
+    keymap.set("n", "<leader>ju", "<Cmd>JdtUpdateConfig<CR>", opts)
+    opts.desc = "Restart LSP"
+    keymap.set("n", "<leader>jr", "<Cmd>JdtRestart<CR>", opts)
 
-            if features.debugger then
-                enable_debugger(bufnr)
-            end
+    if features.debugger then
+        enable_debugger(bufnr)
+    end
 
-            if features.codelens then
-                enable_codelens(bufnr)
-            end
-        end,
-    })
+    if features.codelens then
+        enable_codelens(bufnr)
+    end
 
     -- -- Cool feature, maybe later
     -- vim.api.nvim_buf_create_user_command(bufnr, "SpringBoot", function(opt)
@@ -181,9 +180,7 @@ local cmd = {
     "-Dosgi.checkConfiguration=true",
     "-Dosgi.configuration.cascaded=true",
     -- "-Dosgi.sharedConfiguration.area=/home/sultan/.config/nvim/java/config_linux",
-    "-Dosgi.sharedConfiguration.area="
-        .. LSP_JAVA_PATH
-        .. "/share/java/jdtls/config_linux/",
+    "-Dosgi.sharedConfiguration.area=" .. LSP_JAVA_PATH .. "/share/java/jdtls/config_linux/",
 
     "-Declipse.product=org.eclipse.jdt.ls.core.product",
     "-Dlog.protocol=true",
